@@ -1,0 +1,29 @@
+{
+  "name": "heqiauto/hepc-sdk",
+  "description": "Sdk client for Heqiauto-epc service",
+  "type": "library",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "YanChao Ye",
+      "email": "yeyanchao@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Heqiauto\\HepcSdk\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}

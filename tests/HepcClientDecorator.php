@@ -11,6 +11,26 @@ namespace Tests;
 
 use Heqiauto\HepcSdk\HepcClient;
 
+/**
+ * Class HepcClientDecorator
+ *
+ * @package Tests
+ * @method _nonce()
+ * @method _sign_heqi($params = [], $path = '')
+ * @method _parse_url($url)
+ * @method _build_request_info(&$parse, $method, $data)
+ * @method _build_query($params)
+ * @property  string base_uri
+ * @property  string client_id
+ * @property  string key_type
+ * @property  string connect
+ * @property  bool   debug
+ * @property  int    connect_timeout
+ * @property  array  debug_info
+ * @property  int    timeout
+ * @property  string sdk_version
+ * @property  bool   gzip
+ */
 class HepcClientDecorator
 {
     protected $client;
@@ -40,7 +60,7 @@ class HepcClientDecorator
             // $result = $ret['result'];
         }
 
-        return ''; // $result;
+        return $response; // $result;
     }
 
     private function _socket($url, $params = [], $method = HepcClient::METHOD)
@@ -54,6 +74,11 @@ class HepcClientDecorator
             $method,
             $query
         );
+        if ($this->debug) {
+            $this->debug_info = $info;
+        }
+
+        return '';
     }
 
     private function _curl($url, $params = [], $method = HepcClient::METHOD)
@@ -96,6 +121,8 @@ class HepcClientDecorator
         }
 
         curl_close($session);
+
+        return '';
     }
 
     public function __get($name)

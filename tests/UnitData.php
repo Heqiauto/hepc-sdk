@@ -47,7 +47,15 @@ class UnitData
 
     protected function __construct()
     {
-        $this->config = require_once(__DIR__ . '/../.env.php');
+        $this->config = [
+            'host'          => 'localhost',
+            'client_id'     => 'client_id',
+            'client_secret' => 'client_secret',
+        ];
+
+        if (file_exists(__DIR__ . '/../.env.php')) {
+            $this->config = array_merge($this->config, require_once(__DIR__ . '/../.env.php'));
+        }
     }
 
     public function create($params = [])
@@ -57,7 +65,7 @@ class UnitData
             $this->config['client_id'],
             $this->config['client_secret'],
             array_merge([
-                'debug' => true
+                'debug' => true,
             ], $params));
 
         return $client;

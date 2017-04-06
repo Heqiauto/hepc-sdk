@@ -5,6 +5,7 @@
  * @copyright 2017. Heqiauto Inc.
  * @license   https://opensource.org/licenses/Apache-2.0
  * @link      https://github.com/Heqiauto/hepc-sdk
+ * @version   1.0.0
  */
 
 namespace Heqiauto\HepcSdk;
@@ -44,6 +45,7 @@ class CarModel
      */
     public function getModels($yearId = null, $capacityId = null)
     {
+        if($yearId === '') $yearId = null;
         return $this->call('', ['year_id' => $yearId, 'capacity_id' => $capacityId]);
     }
 

@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Heqiauto\HepcSdk\Ocr;
+use PHPUnit\Framework\TestCase;
 
 class OcrTest extends TestCase
 {

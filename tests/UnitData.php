@@ -142,8 +142,9 @@ class UnitData
 
     public static function getBase64($pic)
     {
-        $fp = fopen($pic, "r");
-        $file_content=chunk_split(base64_encode(fread($fp, filesize($pic))));//base64编码
+        $filename = __DIR__ . '/' . $pic;
+        $fp = fopen($filename, "r");
+        $file_content = chunk_split(base64_encode(fread($fp, filesize($filename))));//base64编码
         fclose($fp);
 
         return $file_content;

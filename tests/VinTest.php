@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Heqiauto\HepcSdk\Vin;
+use PHPUnit\Framework\TestCase;
 
 class VinTest  extends TestCase
 {

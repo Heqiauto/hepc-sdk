@@ -27,6 +27,6 @@ class CategoryTest extends TestCase
         $client = UnitData::client();
         $test = new Category($client);
         $test->getSearchCategory(UnitData::$category_child_name);
-        $this->assertEquals('/categories/' . UnitData::$category_child_name . 'search', UnitData::debugUrl($client));
+        $this->assertEquals('/categories/' . UnitData::$category_child_name . '/search', UnitData::debugUrl($client));
     }
 }

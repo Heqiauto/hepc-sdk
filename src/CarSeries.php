@@ -51,21 +51,23 @@ class CarSeries
      * 通过车系id获得车系年款.
      *
      * @param integer $seriesId 车系Id
+     * @param integer $capacityId 可选参数（通过capacityId和seriesId筛选出对应的年款）
      * @return array series years list
      */
-    public function getYearsBySeriesId($seriesId)
+    public function getYearsBySeriesId($seriesId, $capacityId = null)
     {
-        return $this->call('/' . $seriesId . '/years');
+        return $this->call('/' . $seriesId . '/years', ['capacity_id' => $capacityId]);
     }
 
     /**
      * 通过车系id获得车系排量.
      *
      * @param integer $seriesId 车系Id
+     * @param integer $yearId 可选参数（通过yearId和seriesId筛选出对应的排量）
      * @return array series capacities list
      */
-    public function getCapacitiesBySeriesId($seriesId)
+    public function getCapacitiesBySeriesId($seriesId, $yearId = null)
     {
-        return $this->call('/' . $seriesId . '/capacities');
+        return $this->call('/' . $seriesId . '/capacities', ['year_id' => $yearId]);
     }
 }

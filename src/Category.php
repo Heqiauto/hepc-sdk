@@ -42,6 +42,11 @@ class Category
         return $this->call('/' . $categoryId);
     }
 
+    public function getSearchCategory($query)
+    {
+        return $this->call('/' . $query . '/search');
+    }
+
     private function call($path = '')
     {
         return $this->client->call(self::$base . $path);

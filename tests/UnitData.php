@@ -42,6 +42,9 @@ class UnitData
     public static $part_uni = '11111'; //配件拓展属性值
     public static $part_usage_id = '233'; //配件拓展属性值
     public static $part_usage = '1111'; //配件拓展属性值
+    public static $plate_url = '4354wert4.jpg'; //车牌图片
+    public static $vin_url = '669803153629290992.jpg'; //Vin图片
+    public static $vin = 'LVVDB12A6DD201624'; //Vin号
 
     protected $config;
 
@@ -135,5 +138,14 @@ class UnitData
         }
 
         return $query[$name];
+    }
+
+    public static function getBase64($pic)
+    {
+        $fp = fopen($pic, "r");
+        $file_content=chunk_split(base64_encode(fread($fp, filesize($pic))));//base64编码
+        fclose($fp);
+
+        return $file_content;
     }
 }

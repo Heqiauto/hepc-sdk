@@ -5,6 +5,7 @@
  * @copyright 2017. Heqiauto Inc.
  * @license   https://opensource.org/licenses/Apache-2.0
  * @link      https://github.com/Heqiauto/hepc-sdk
+ * @version   1.0.0
  */
 
 namespace Heqiauto\HepcSdk;
@@ -351,12 +352,22 @@ class HepcClient
      */
     private function _curl($url, $params = [], $method = self::METHOD)
     {
-        $query = $this->_build_query($params);
         $method = strtoupper($method);
-
         if ($method == self::METHOD_GET) {
+            $query = $this->_build_query($params);
             $url .= preg_match('/\?/i', $url) ? '&' . $query : '?' . $query;
+
         } else {
+            $query = [
+                'client_id' => $params['client_id'],
+                'nonce' => $params['nonce'],
+                'sign' => $params['sign']
+            ];
+            $query = $this->_build_query($query);
+            $url .= preg_match('/\?/i', $url) ? '&' . $query : '?' . $query;
+            unset($params['client_id']);
+            unset($params['nonce']);
+            unset($params['sign']);
             $method = self::METHOD_POST;
         }
 
@@ -372,7 +383,7 @@ class HepcClient
         ];
 
         if ($method == self::METHOD_POST) {
-            $options[CURLOPT_POSTFIELDS] = $params;
+            $options[CURLOPT_POSTFIELDS] = json_encode($params);
         }
 
         if ($this->gzip) {
@@ -687,6 +698,7 @@ class HepcClient
     protected function _parse_response_curl($resp)
     {
         $resp_arr = json_decode($resp, true);
+
         if (isset($resp_arr['success']) && $resp_arr['success'] == 'true') {
             return $resp_arr['result'];
         } else {

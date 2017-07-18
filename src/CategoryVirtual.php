@@ -21,14 +21,27 @@ class CategoryVirtual
     }
 
     /**
-     * 通过品类id获取该目录下的子目录和节点
+     * 通过虚拟目录id获取该目录下的子目录和节点
      *
-     * @param integer $category_id 为空时返回一级目录
+     * @param integer $categoryId 为空时返回一级目录
+     * @return mixed 包含本身目录信息和子集信息
+     */
+    public function getCategoryVirtual($categoryId = NULL)
+    {
+        $path = empty($categoryId) ? '' : '/' . $categoryId;
+
+        return $this->call($path);
+    }
+
+    /**
+     * 获取该虚拟目录详情
+     *
+     * @param integer $categoryId 配件虚拟目录Id
      * @return mixed
      */
-    public function getCategoryVirtual($category_id = NULL)
+    public function getCategoryVirtualDetail($categoryId = null)
     {
-        return $this->call('', ['category_id' => $category_id]);
+        return $this->call('/' . $categoryId, ['detail' => true]);
     }
 
     private function call($path = '', $params = [])

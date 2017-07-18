@@ -10,7 +10,6 @@
 
 namespace Heqiauto\HepcSdk;
 
-
 class Ocr
 {
     private static $base = '/ocr';

@@ -45,6 +45,8 @@ class UnitData
     public static $plate_url = '4354wert4.jpg'; //车牌图片
     public static $vin_url = '669803153629290992.jpg'; //Vin图片
     public static $vin = 'LVVDB12A6DD201624'; //Vin号
+    public static $group_id = 31; //虚拟目录组id
+    public static $category_virtual_id = 59; //虚拟目录id
 
     protected $config;
 
@@ -143,8 +145,9 @@ class UnitData
     public static function getBase64($pic)
     {
         $filename = __DIR__ . '/' . $pic;
-        $fp = fopen($filename, "r");
-        $file_content = chunk_split(base64_encode(fread($fp, filesize($filename))));//base64编码
+        $fp = fopen($filename, 'r');
+
+        $file_content=chunk_split(base64_encode(fread($fp, filesize($filename))));//base64编码
         fclose($fp);
 
         return $file_content;

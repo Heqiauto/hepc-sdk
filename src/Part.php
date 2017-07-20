@@ -62,15 +62,16 @@ class Part
      * 通过车型id获取车型关联的配件列表.
      *
      * @param int $modelId 车型Id
+     * @param int $brandId 品牌Id (可选参数，用于筛选)
      * @return object|bool part list
      */
-    public function getPartsByCarModel($modelId)
+    public function getPartsByCarModel($modelId, $brandId = null)
     {
         if ($modelId === null) {
             return false;
         }
 
-        return $this->call('', ['model_id' => $modelId]);
+        return $this->call('', ['model_id' => $modelId, 'brand_id' => $brandId]);
     }
 
     /**

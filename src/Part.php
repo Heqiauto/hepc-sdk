@@ -44,7 +44,7 @@ class Part
     }
 
     /**
-     * 通过品牌id获取品牌关联的配件列表.
+     * 通过配件品牌id获取品牌关联的配件列表.
      *
      * @param int $brandId 配件品牌Id
      * @return object|bool part list
@@ -62,7 +62,7 @@ class Part
      * 通过车型id获取车型关联的配件列表.
      *
      * @param int $modelId 车型Id
-     * @param int $brandId 品牌Id (可选参数，用于筛选)
+     * @param int $brandId 配件品牌Id (可选参数，用于筛选)
      * @return object|bool part list
      */
     public function getPartsByCarModel($modelId, $brandId = null)
@@ -73,6 +73,7 @@ class Part
 
         return $this->call('', ['model_id' => $modelId, 'brand_id' => $brandId]);
     }
+
 
     /**
      * 分页查询所有配件.

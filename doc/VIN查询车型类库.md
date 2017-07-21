@@ -16,7 +16,7 @@ $vin = new Vin($client); //创建实例对象
 
 ## 通过vin码获取车型信息
 
-### `Vin::getCarModelByVin($vin)`
+### `getCarModelByVin($vin)`
 
 #### 调用示例
 

@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class CarManu
+class Hepc_SDK_CarManu
 {
     private static $base = '/manus';
     private $client = null;
@@ -19,7 +18,7 @@ class CarManu
     /**
      * CarManu constructor.
      *
-     * @param object  $client  HepcClient对象
+     * @param object $client HepcClient对象
      * @param integer $brandId 汽车品牌Id
      */
     public function __construct($client = null, $brandId = null)
@@ -38,7 +37,7 @@ class CarManu
         return $this->call();
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call('/brands/' . $this->brandId . self::$base . $path, $params);
     }

@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class CarSeries
+class Hepc_SDK_CarSeries
 {
     private static $base = '/series';
     private $client = null;
@@ -20,9 +19,9 @@ class CarSeries
     /**
      * CarSeries constructor.
      *
-     * @param object  $client  HepcClient对象
+     * @param object $client HepcClient对象
      * @param integer $brandId 汽车品牌Id
-     * @param integer $manuId  汽车厂商Id
+     * @param integer $manuId 汽车厂商Id
      */
     public function __construct($client = null, $brandId = null, $manuId = null)
     {
@@ -41,7 +40,7 @@ class CarSeries
         return $this->call();
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call('/brands/' . $this->brandId . '/manus/' . $this->manuId . self::$base . $path,
             $params);
@@ -56,7 +55,7 @@ class CarSeries
      */
     public function getYearsBySeriesId($seriesId, $capacityId = null)
     {
-        return $this->call('/' . $seriesId . '/years', ['capacity_id' => $capacityId]);
+        return $this->call('/' . $seriesId . '/years', array('capacity_id' => $capacityId));
     }
 
     /**
@@ -68,6 +67,6 @@ class CarSeries
      */
     public function getCapacitiesBySeriesId($seriesId, $yearId = null)
     {
-        return $this->call('/' . $seriesId . '/capacities', ['year_id' => $yearId]);
+        return $this->call('/' . $seriesId . '/capacities', array('year_id' => $yearId));
     }
 }

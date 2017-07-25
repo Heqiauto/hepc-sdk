@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Category
+class Hepc_SDK_Category
 {
     private static $base = '/categories';
     private $client = null;
@@ -40,6 +39,11 @@ class Category
         return $this->call($path);
     }
 
+    private function call($path = '', $params = array())
+    {
+        return $this->client->call(self::$base . $path, $params);
+    }
+
     /**
      * 获取该目录或节点详情
      *
@@ -48,7 +52,7 @@ class Category
      */
     public function getCategoryDetail($categoryId = null)
     {
-        return $this->call('/' . $categoryId, ['detail' => true]);
+        return $this->call('/' . $categoryId, array('detail' => true));
     }
 
     /**
@@ -60,10 +64,5 @@ class Category
     public function getSearchCategory($query)
     {
         return $this->call('/' . $query . '/search');
-    }
-
-    private function call($path = '', $params = [])
-    {
-        return $this->client->call(self::$base . $path, $params);
     }
 }

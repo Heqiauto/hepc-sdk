@@ -8,7 +8,6 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
 /**
  * Sdk client to access Heqiauto-EPC service
@@ -17,7 +16,7 @@ namespace Heqiauto\HepcSdk;
  * 1、根据请求的参数来生成签名和nonce.
  * 2、请求API服务并返回response结果.
  */
-class HepcClient
+class Hepc_SDK_HepcClient
 {
     /**
      * 指定默认的请求方式；默认为GET.
@@ -72,49 +71,60 @@ class HepcClient
      * @var string
      */
     protected $base_uri;
-
+    /**
+     *指定使用加密key和对应的secret.
+     *
+     * @var string ('heqi')
+     */
+    protected $key_type = 'heqi';
+    /**
+     * 指定签名算法方式.
+     *
+     * @var string ('HMAC-SHA1'）
+     */
+    protected $signature_method = 'HMAC-SHA1';
+    /**
+     * 指定签名算法版本.
+     *
+     * @var string ('HMAC-SHA1'）
+     */
+    protected $signature_version = '1.0';
     /**
      * 当前API的版本号.
      *
      * @var string
      */
     private $version = 'v1';
-
     /**
      * SDK的版本号.
      *
      * @var string
      */
     private $sdk_version = '1.0.0';
-
     /**
      * 请求API的时间，单位为秒.
      *
      * @var int
      */
     private $timeout = 10;
-
     /**
      * 请求API的连接超时时间，单位为秒.
      *
      * @var int
      */
     private $connect_timeout = 1;
-
     /**
      * 请求的domain地址.
      *
      * @var string
      */
     private $host;
-
     /**
      * 当前的请求方式，有socket和curl两种.
      *
      * @var string
      */
     private $connect = 'curl';
-
     /**
      * 是否打开gzip功能.
      *
@@ -126,14 +136,12 @@ class HepcClient
      * @var boolean
      */
     private $gzip = false;
-
     /**
      * 是否开启debug信息.
      *
      * @var boolean
      */
     private $debug = false;
-
     /**
      * debug信息，当$debug = true时 存储sdk调用时产生的debug信息，供 get_request 调用.
      *
@@ -142,44 +150,23 @@ class HepcClient
     private $debug_info = '';
 
     /**
-     *指定使用加密key和对应的secret.
-     *
-     * @var string ('heqi')
-     */
-    protected $key_type = 'heqi';
-
-    /**
-     * 指定签名算法方式.
-     *
-     * @var string ('HMAC-SHA1'）
-     */
-    protected $signature_method = 'HMAC-SHA1';
-
-    /**
-     * 指定签名算法版本.
-     *
-     * @var string ('HMAC-SHA1'）
-     */
-    protected $signature_version = '1.0';
-
-    /**
      * 构造函数.
      *
      * 与服务器交互的客户端，支持单例方式调用.
      *
-     * @param string $host     请求的domain地址.
-     * @param string $key      用户的key.
-     * @param string $secret   用户的secret，对应的Access Key Secret.
-     * @param array  $opts     包含下面一些可选信息 {
-     *     @var string $key_type key和secret类型，表示这个是Heqiauto.com颁发的
-     *     @var string $ version 使用的API版本。 默认值为:v1
-     *     @var string $ gzip    指定返回的结果用gzip压缩。 默认值为:false
-     *     @var string $ debug   打印debug信息。 默认值为:false
-     *     @var string $ signature_method  签名方式，目前支持HMAC-SHA1。 默认值为:HMAC-SHA1
-     *     @var string $ signature_version 签名算法版本。 默认值为:1.0
-     * }
+     * @param string $host 请求的domain地址.
+     * @param string $key 用户的key.
+     * @param string $secret 用户的secret，对应的Access Key Secret.
+     * @param array $opts 包含下面一些可选信息 {
+     * @var string $key_type key和secret类型，表示这个是Heqiauto.com颁发的
+     * @var string $ version 使用的API版本。 默认值为:v1
+     * @var string $ gzip    指定返回的结果用gzip压缩。 默认值为:false
+     * @var string $ debug   打印debug信息。 默认值为:false
+     * @var string $ signature_method  签名方式，目前支持HMAC-SHA1。 默认值为:HMAC-SHA1
+     * @var string $ signature_version 签名算法版本。 默认值为:1.0
+     *                         }
      */
-    public function __construct($host, $key, $secret, $opts = [], $key_type = 'heqi')
+    public function __construct($host, $key, $secret, $opts = array(), $key_type = 'heqi')
     {
         if (substr($host, -1) == "/") { // 对于用户通过参数指定的host，需要检查host结尾是否有/，有则去掉
             $this->host = rtrim($host, '/');
@@ -195,15 +182,15 @@ class HepcClient
             $this->client_secret = $secret;
         }
 
-        if (isset($opts['version']) && ! empty($opts['version'])) {
+        if (isset($opts['version']) && !empty($opts['version'])) {
             $this->version = $opts['version'];
         }
 
-        if (isset($opts['timeout']) && ! empty($opts['timeout'])) {
+        if (isset($opts['timeout']) && !empty($opts['timeout'])) {
             $this->timeout = $opts['timeout'];
         }
 
-        if (isset($opts['connect_timeout']) && ! empty($opts['connect_timeout'])) {
+        if (isset($opts['connect_timeout']) && !empty($opts['connect_timeout'])) {
             $this->connect_timeout = $opts['connect_timeout'];
         }
 
@@ -215,11 +202,11 @@ class HepcClient
             $this->debug = true;
         }
 
-        if (isset($opts['signature_method']) && ! empty($opts['signature_method'])) {
+        if (isset($opts['signature_method']) && !empty($opts['signature_method'])) {
             $this->signature_method = $opts['signature_method'];
         }
 
-        if (isset($opts['signature_version']) && ! empty($opts['signature_version'])) {
+        if (isset($opts['signature_version']) && !empty($opts['signature_version'])) {
             $this->signature_version = $opts['signature_version'];
         }
 
@@ -233,13 +220,13 @@ class HepcClient
      *
      * 向服务器发出请求并获得返回结果.
      *
-     * @param string $path   当前请求的path路径.
-     * @param array  $params 当前请求的所有参数数组.
+     * @param string $path 当前请求的path路径.
+     * @param array $params 当前请求的所有参数数组.
      * @param string $method 当前请求的方法。默认值为:GET
      * @return string 返回获取的结果.
      * @donotgeneratedoc
      */
-    public function call($path, $params = [], $method = self::METHOD)
+    public function call($path, $params = array(), $method = self::METHOD)
     {
         $url = $this->base_uri . $path;
         if ($this->key_type == 'heqi') {
@@ -273,35 +260,13 @@ class HepcClient
         return md5($this->client_id . $this->client_secret . $time) . '.' . $time;
     }
 
-    /**
-     * 根据参数生成当前的签名.
-     *
-     * 如果指定了sign_mode且sign_mode为1，则参数中的items将不会被计算签名.
-     *
-     * @param array $params 返回生成的签名.
-     * @return string
-     */
-    protected function _sign($params = [])
+    protected function _sign_heqi($params = array(), $path = '')
     {
         $query = "";
         if (isset($params['sign_mode']) && $params['sign_mode'] == 1) {
             unset($params['items']);
         }
-        if (is_array($params) && ! empty($params)) {
-            ksort($params);
-            $query = $this->_build_query($params);
-        }
-
-        return md5($query . $this->client_secret);
-    }
-
-    protected function _sign_heqi($params = [], $path = '')
-    {
-        $query = "";
-        if (isset($params['sign_mode']) && $params['sign_mode'] == 1) {
-            unset($params['items']);
-        }
-        if (is_array($params) && ! empty($params)) {
+        if (is_array($params) && !empty($params)) {
             ksort($params);
             $query = $this->_build_query($params);
         }
@@ -310,47 +275,29 @@ class HepcClient
     }
 
     /**
-     * 过滤签名中不用来签名的参数,并且排序.
+     * 把数组生成http请求需要的参数.
      *
-     * @param array $parameters
-     * @return array
+     * @param array $params
+     * @return string
      */
-    protected function _params_filter($parameters = [])
+    private function _build_query($params)
     {
-        $params = [];
-        while (list ($key, $val) = each($parameters)) {
-            if ($key == "Signature" || $val === "" || $val === null) {
-                continue;
-            } else {
-                $params[$key] = $parameters[$key];
-            }
-        }
-        ksort($params);
-        reset($params);
-
-        return $params;
-    }
-
-    protected function _percent_encode($str)
-    {
-        // 使用urlencode编码后，将"+","*","%7E"做替换即满足 API规定的编码规范
-        $res = urlencode($str);
-        $res = preg_replace('/\+/', '%20', $res);
-        $res = preg_replace('/\*/', '%2A', $res);
-        $res = preg_replace('/%7E/', '~', $res);
-
-        return $res;
+        $args = http_build_query($params, '', '&');
+        // remove the php special encoding of parameters
+        // see http://www.php.net/manual/en/function.http-build-query.php#78603
+        //return preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $args);
+        return $args;
     }
 
     /**
      * 通过curl的方式获取请求结果.
      *
-     * @param string $url    请求的URI.
-     * @param array  $params 请求的参数数组.
+     * @param string $url 请求的URI.
+     * @param array $params 请求的参数数组.
      * @param string $method 请求的方法，默认为self::METHOD.
      * @return string 返回获取的结果.
      */
-    private function _curl($url, $params = [], $method = self::METHOD)
+    private function _curl($url, $params = array(), $method = self::METHOD)
     {
         $method = strtoupper($method);
         if ($method == self::METHOD_GET) {
@@ -358,11 +305,11 @@ class HepcClient
             $url .= preg_match('/\?/i', $url) ? '&' . $query : '?' . $query;
 
         } else {
-            $query = [
+            $query = array(
                 'client_id' => $params['client_id'],
                 'nonce' => $params['nonce'],
-                'sign' => $params['sign']
-            ];
+                'sign' => $params['sign'],
+            );
             $query = $this->_build_query($query);
             $url .= preg_match('/\?/i', $url) ? '&' . $query : '?' . $query;
             unset($params['client_id']);
@@ -371,16 +318,16 @@ class HepcClient
             $method = self::METHOD_POST;
         }
 
-        $options = [
-            CURLOPT_HTTP_VERSION   => 'CURL_HTTP_VERSION_1_1',
+        $options = array(
+            CURLOPT_HTTP_VERSION => 'CURL_HTTP_VERSION_1_1',
             CURLOPT_CONNECTTIMEOUT => $this->connect_timeout,
-            CURLOPT_TIMEOUT        => $this->timeout,
-            CURLOPT_CUSTOMREQUEST  => $method,
-            CURLOPT_HEADER         => false,
+            CURLOPT_TIMEOUT => $this->timeout,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HEADER => false,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_USERAGENT      => "heqiauto/php sdk " . $this->sdk_version,//php sdk 版本信息
-            CURLOPT_HTTPHEADER     => ['Expect:'],
-        ];
+            CURLOPT_USERAGENT => "heqiauto/php sdk " . $this->sdk_version,//php sdk 版本信息
+            CURLOPT_HTTPHEADER => array('Expect:'),
+        );
 
         if ($method == self::METHOD_POST) {
             $options[CURLOPT_POSTFIELDS] = json_encode($params);
@@ -407,17 +354,27 @@ class HepcClient
         return $response;
     }
 
+    protected function _parse_response_curl($resp)
+    {
+        $resp_arr = json_decode($resp, true);
+
+        if (isset($resp_arr['success']) && $resp_arr['success'] == 'true') {
+            return $resp_arr['result'];
+        } else {
+            throw new Exception("Errorcode:" . $resp_arr['errors'][0]['error_code'] . "#" . $resp_arr['errors'][0]['error_msg']);
+        }
+    }
 
     /**
      * 通过socket的方式获取请求结果.
      *
-     * @param string $url    请求的URI.
-     * @param array  $params 请求的参数数组.
+     * @param string $url 请求的URI.
+     * @param array $params 请求的参数数组.
      * @param string $method 请求方法，默认为self::METHOD.
      * @throws Exception
      * @return string
      */
-    private function _socket($url, $params = [], $method = self::METHOD)
+    private function _socket($url, $params = array(), $method = self::METHOD)
     {
         $method = strtoupper($method);
 
@@ -442,7 +399,7 @@ class HepcClient
 
         stream_set_timeout($socket, $this->timeout);
 
-        if ( ! $socket) {
+        if (!$socket) {
             throw new Exception("Connect " . $parse['host'] . ' fail.');
         }
 
@@ -457,58 +414,51 @@ class HepcClient
     }
 
     /**
-     * 调试接口.
+     * 解析URL并生成host、schema、path、query等信息.
      *
-     * 获取SDK调用的调试信息,需要指定debug=true才能使用
-     *
-     * @return string|null 调试开关(debug)打开时返回调试信息.
-     */
-    public function get_request()
-    {
-        if ($this->debug) {
-            return $this->debug_info;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * 解析http返回的结果，并分析出response 头和body.
-     *
-     * @param string $response
+     * @param string $url
+     * @throws Exception
      * @return array
      */
-    private function _parse_response($response)
+    private function _parse_url($url)
     {
-        list($header_content,) = explode("\r\n\r\n", $response);
-        $header = $this->_parse_http_socket_header($header_content);
-        $response = trim(stristr($response, "\r\n\r\n"), "\r\n");
+        $parse = parse_url($url);
+        if (empty($parse) || !is_array($parse)) {
+            throw new Exception("Host is empty.");
+        }
 
-        $ret = [];
-        $ret["result"] =
-            (isset($header['Content-Encoding']) &&
-                trim($header['Content-Encoding']) == 'gzip') ?
-                $this->_gzdecode($response, $header) : $this->_check_chunk($response, $header);
-        $ret["info"]["http_code"] =
-            isset($header["http_code"]) ? $header["http_code"] : 0;
-        $ret["info"]["headers"] = $header;
+        if (!isset($parse['port']) || !$parse['port']) {
+            $parse['port'] = '80';
+        }
 
-        return $ret;
+        $parse['host'] = str_replace(
+                array('http://', 'https://'),
+                array('', 'ssl://'),
+                $parse['scheme'] . "://"
+            ) . $parse['host'];
+
+        $parse["path"] = isset($parse["path"]) ? $parse["path"] : '/';
+        $query = isset($parse['query']) ? $parse['query'] : '';
+
+        $path = str_replace(array('\\', '//'), '/', $parse['path']);
+        $parse['path'] = $query ? $path . "?" . $query : $path;
+
+        return $parse;
     }
 
     private function _build_request_info(&$parse, $method, $data)
     {
-        $info = [
-            'url'            => '',
-            'method'         => self::METHOD_GET,
-            'content_type'   => 'application/x-www-form-urlencoded',
+        $info = array(
+            'url' => '',
+            'method' => self::METHOD_GET,
+            'content_type' => 'application/x-www-form-urlencoded',
             'content_length' => 0,
-            'http_code'      => 200,
-            'header_size'    => 0,
-            'request_size'   => 0,
-            'gzip'           => false,
-            'user_agent'     => '',
-        ];
+            'http_code' => 200,
+            'header_size' => 0,
+            'request_size' => 0,
+            'gzip' => false,
+            'user_agent' => '',
+        );
 
 
         if ($method == self::METHOD_GET) {
@@ -532,8 +482,8 @@ class HepcClient
     /**
      * 生成http头信息.
      *
-     * @param array  $info   请求参数信息
-     * @param string $data   HTTP参数串.
+     * @param array $info 请求参数信息
+     * @param string $data HTTP参数串.
      * @return string
      */
     private function _build_request_content($info, $data)
@@ -564,54 +514,28 @@ class HepcClient
         return $write;
     }
 
-
     /**
-     * 把数组生成http请求需要的参数.
+     * 解析http返回的结果，并分析出response 头和body.
      *
-     * @param array $params
-     * @return string
-     */
-    private function _build_query($params)
-    {
-        $args = http_build_query($params, '', '&');
-        // remove the php special encoding of parameters
-        // see http://www.php.net/manual/en/function.http-build-query.php#78603
-        //return preg_replace('/%5B(?:[0-9]|[1-9][0-9]+)%5D=/', '=', $args);
-        return $args;
-    }
-
-
-    /**
-     * 解析URL并生成host、schema、path、query等信息.
-     *
-     * @param string $url
-     * @throws Exception
+     * @param string $response
      * @return array
      */
-    private function _parse_url($url)
+    private function _parse_response($response)
     {
-        $parse = parse_url($url);
-        if (empty($parse) || ! is_array($parse)) {
-            throw new Exception("Host is empty.");
-        }
+        list($header_content,) = explode("\r\n\r\n", $response);
+        $header = $this->_parse_http_socket_header($header_content);
+        $response = trim(stristr($response, "\r\n\r\n"), "\r\n");
 
-        if ( ! isset($parse['port']) || ! $parse['port']) {
-            $parse['port'] = '80';
-        }
+        $ret = array();
+        $ret["result"] =
+            (isset($header['Content-Encoding']) &&
+                trim($header['Content-Encoding']) == 'gzip') ?
+                $this->_gzdecode($response, $header) : $this->_check_chunk($response, $header);
+        $ret["info"]["http_code"] =
+            isset($header["http_code"]) ? $header["http_code"] : 0;
+        $ret["info"]["headers"] = $header;
 
-        $parse['host'] = str_replace(
-                ['http://', 'https://'],
-                ['', 'ssl://'],
-                $parse['scheme'] . "://"
-            ) . $parse['host'];
-
-        $parse["path"] = isset($parse["path"]) ? $parse["path"] : '/';
-        $query = isset($parse['query']) ? $parse['query'] : '';
-
-        $path = str_replace(['\\', '//'], '/', $parse['path']);
-        $parse['path'] = $query ? $path . "?" . $query : $path;
-
-        return $parse;
+        return $ret;
     }
 
     /**
@@ -623,7 +547,7 @@ class HepcClient
     private static function _parse_http_socket_header($str)
     {
         $slice = explode("\r\n", $str);
-        $headers = [];
+        $headers = array();
 
         foreach ($slice as $v) {
             if (false !== strpos($v, "HTTP")) {
@@ -638,12 +562,11 @@ class HepcClient
         return $headers;
     }
 
-
     /**
      * 解压缩gzip生成的数据.
      *
      * @param string $data 压缩的数据.
-     * @param array  $header
+     * @param array $header
      * @param string $rn
      * @return string 解压缩的数据.
      */
@@ -671,9 +594,9 @@ class HepcClient
     /**
      * 检查当前是否是返回chunk，如果是的话，从body中获取content长度并截取.
      *
-     * @param string $data   body内容.
-     * @param array  $header header头信息的数组.
-     * @param string $rn     chunk的截取字符串.
+     * @param string $data body内容.
+     * @param array $header header头信息的数组.
+     * @param string $rn chunk的截取字符串.
      *
      * @return string 如果为chunk则返回正确的body内容，否则全部返回.
      */
@@ -688,21 +611,81 @@ class HepcClient
         return $data;
     }
 
+    /**
+     * 调试接口.
+     *
+     * 获取SDK调用的调试信息,需要指定debug=true才能使用
+     *
+     * @return string|null 调试开关(debug)打开时返回调试信息.
+     */
+    public function get_request()
+    {
+        if ($this->debug) {
+            return $this->debug_info;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * 根据参数生成当前的签名.
+     *
+     * 如果指定了sign_mode且sign_mode为1，则参数中的items将不会被计算签名.
+     *
+     * @param array $params 返回生成的签名.
+     * @return string
+     */
+    protected function _sign($params = array())
+    {
+        $query = "";
+        if (isset($params['sign_mode']) && $params['sign_mode'] == 1) {
+            unset($params['items']);
+        }
+        if (is_array($params) && !empty($params)) {
+            ksort($params);
+            $query = $this->_build_query($params);
+        }
+
+        return md5($query . $this->client_secret);
+    }
+
+    /**
+     * 过滤签名中不用来签名的参数,并且排序.
+     *
+     * @param array $parameters
+     * @return array
+     */
+    protected function _params_filter($parameters = array())
+    {
+        $params = array();
+        while (list ($key, $val) = each($parameters)) {
+            if ($key == "Signature" || $val === "" || $val === null) {
+                continue;
+            } else {
+                $params[$key] = $parameters[$key];
+            }
+        }
+        ksort($params);
+        reset($params);
+
+        return $params;
+    }
+
+    protected function _percent_encode($str)
+    {
+        // 使用urlencode编码后，将"+","*","%7E"做替换即满足 API规定的编码规范
+        $res = urlencode($str);
+        $res = preg_replace('/\+/', '%20', $res);
+        $res = preg_replace('/\*/', '%2A', $res);
+        $res = preg_replace('/%7E/', '~', $res);
+
+        return $res;
+    }
+
     protected function get_microtime()
     {
         list($usec, $sec) = explode(" ", microtime());
 
         return floor(((float)$usec + (float)$sec) * 1000);
-    }
-
-    protected function _parse_response_curl($resp)
-    {
-        $resp_arr = json_decode($resp, true);
-
-        if (isset($resp_arr['success']) && $resp_arr['success'] == 'true') {
-            return $resp_arr['result'];
-        } else {
-            throw new Exception("Errorcode:" . $resp_arr['errors'][0]['error_code'] . "#" . $resp_arr['errors'][0]['error_msg']);
-        }
     }
 }

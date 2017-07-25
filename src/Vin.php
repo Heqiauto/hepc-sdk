@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Vin
+class Hepc_SDK_Vin
 {
     private static $base = '/vin';
     private $client = null;
@@ -36,7 +35,7 @@ class Vin
         return $this->call('/' . $vin);
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call(self::$base . $path, $params);
     }

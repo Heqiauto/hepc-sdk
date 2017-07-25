@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Search
+class Hepc_SDK_Search
 {
     private static $base = '/search';
     private $client = null;
@@ -37,7 +36,12 @@ class Search
             return null;
         }
 
-        return $this->call('', ['query' => $query, 'action' => 'suggest']);
+        return $this->call('', array('query' => $query, 'action' => 'suggest'));
+    }
+
+    private function call($path = '', $params = array())
+    {
+        return $this->client->call(self::$base . $path, $params);
     }
 
     /**
@@ -52,11 +56,6 @@ class Search
             return null;
         }
 
-        return $this->call('', ['query' => $query, 'action' => 'list']);
-    }
-
-    private function call($path = '', $params = [])
-    {
-        return $this->client->call(self::$base . $path, $params);
+        return $this->call('', array('query' => $query, 'action' => 'list'));
     }
 }

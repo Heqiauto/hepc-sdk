@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class CarBrand
+class Hepc_SDK_CarBrand
 {
     private static $base = '/brands';
     private $client = null;
@@ -35,7 +34,7 @@ class CarBrand
         return $this->call();
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call(self::$base . $path, $params);
     }

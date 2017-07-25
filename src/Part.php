@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Part
+class Hepc_SDK_Part
 {
     private static $base = '/parts';
     private $client = null;
@@ -19,7 +18,7 @@ class Part
     /**
      * Part constructor.
      *
-     * @param object  $client     HepcClient对象
+     * @param object $client HepcClient对象
      * @param integer $categoryId 配件目录Id
      */
     public function __construct($client = null, $categoryId = null)
@@ -35,10 +34,10 @@ class Part
      */
     public function getPartCounts()
     {
-        return $this->call('', ['action' => 'counts']);
+        return $this->call('', array('action' => 'counts'));
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call('/categories/' . $this->categoryId . self::$base . $path, $params);
     }
@@ -55,7 +54,7 @@ class Part
             return false;
         }
 
-        return $this->call('', ['brand_id' => $brandId]);
+        return $this->call('', array('brand_id' => $brandId));
     }
 
     /**
@@ -71,7 +70,7 @@ class Part
             return false;
         }
 
-        return $this->call('', ['model_id' => $modelId, 'brand_id' => $brandId]);
+        return $this->call('', array('model_id' => $modelId, 'brand_id' => $brandId));
     }
 
 
@@ -84,7 +83,7 @@ class Part
      */
     public function getParts($start, $limit)
     {
-        return $this->call('', ['start' => $start, 'limit' => $limit]);
+        return $this->call('', array('start' => $start, 'limit' => $limit));
     }
 
     /**

@@ -1,8 +1,7 @@
 <?php
 
-namespace Heqiauto\HepcSdk;
 
-class CategoryVirtual
+class Hepc_SDK_CategoryVirtual
 {
     private static $base = '/category-virtual';
     private $client = null;
@@ -14,7 +13,7 @@ class CategoryVirtual
      * @param object $client HepcClient对象
      * @param integer $group_id 虚拟目录组id
      */
-    public function __construct($client = null , $group_id)
+    public function __construct($client = null, $group_id)
     {
         $this->groupId = $group_id;
         $this->client = $client;
@@ -26,11 +25,16 @@ class CategoryVirtual
      * @param integer $categoryId 为空时返回一级目录
      * @return mixed 包含本身目录信息和子集信息
      */
-    public function getCategoryVirtual($categoryId = NULL)
+    public function getCategoryVirtual($categoryId = null)
     {
         $path = empty($categoryId) ? '' : '/' . $categoryId;
 
         return $this->call($path);
+    }
+
+    private function call($path = '', $params = array())
+    {
+        return $this->client->call('/groups/' . $this->groupId . self::$base . $path, $params);
     }
 
     /**
@@ -41,11 +45,6 @@ class CategoryVirtual
      */
     public function getCategoryVirtualDetail($categoryId = null)
     {
-        return $this->call('/' . $categoryId, ['detail' => true]);
-    }
-
-    private function call($path = '', $params = [])
-    {
-        return $this->client->call('/groups/' . $this->groupId . self::$base . $path, $params);
+        return $this->call('/' . $categoryId, array('detail' => true));
     }
 }

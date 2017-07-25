@@ -7,9 +7,8 @@
  * @link      https://github.com/Heqiauto/hepc-sdk
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Exception extends \Exception
+class Hepc_SDK_Exception extends \Exception
 {
 
 }

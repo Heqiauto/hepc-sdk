@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class PartBrand
+class Hepc_SDK_PartBrand
 {
     private static $base = '/part-brands';
     private $client = null;
@@ -35,7 +34,7 @@ class PartBrand
         return $this->call();
     }
 
-    private function call($path = '', $params = [])
+    private function call($path = '', $params = array())
     {
         return $this->client->call(self::$base . $path, $params);
     }
@@ -52,6 +51,6 @@ class PartBrand
             return false;
         }
 
-        return $this->call('', ['category_id' => $categoryId]);
+        return $this->call('', array('category_id' => $categoryId));
     }
 }

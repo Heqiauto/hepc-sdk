@@ -8,9 +8,8 @@
  * @version   1.0.0
  */
 
-namespace Heqiauto\HepcSdk;
 
-class Ocr
+class Hepc_SDK_Ocr
 {
     private static $base = '/ocr';
     private $client = null;
@@ -33,7 +32,12 @@ class Ocr
      */
     public function getVinByOcr($ocr)
     {
-        return $this->call('/vin', ['file_data' => $ocr], 'POST');
+        return $this->call('/vin', array('file_data' => $ocr), 'POST');
+    }
+
+    private function call($path = '', $params = array(), $method = '')
+    {
+        return $this->client->call(self::$base . $path, $params, $method);
     }
 
     /**
@@ -44,11 +48,6 @@ class Ocr
      */
     public function getPlateByOcr($ocr)
     {
-        return $this->call('/plate', ['file_data' => $ocr], 'POST');
-    }
-
-    private function call($path = '', $params = [], $method = '')
-    {
-        return $this->client->call(self::$base . $path, $params, $method);
+        return $this->call('/plate', array('file_data' => $ocr), 'POST');
     }
 }

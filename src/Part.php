@@ -59,6 +59,21 @@ class Part
     }
 
     /**
+     * 通过车系id获取车型关联的配件列表.
+     *
+     * @param int $seriesId 车系Id
+     * @return object|bool part list
+     */
+    public function getPartsBySeriesId($seriesId)
+    {
+        if ($seriesId === null) {
+            return false;
+        }
+
+        return $this->call('', ['series_id' => $seriesId]);
+    }
+
+    /**
      * 通过车型id获取车型关联的配件列表.
      *
      * @param int $modelId 车型Id

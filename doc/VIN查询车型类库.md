@@ -41,3 +41,17 @@ Array
 )
 ```
 
+##### 参数说明
+
+参数 | 类型 | 说明
+--- | --- | ---
+**model_id** | int | 车型id
+**brand_name** | string | 汽车品牌名
+**family_name** | string | 车系名称
+**vehicle_name** | string | 车型名称
+**displacement** | string | 排量
+**year_pattern** | string | 年款
+**gearbox_type** | string | 变速箱类型
+**engine_model** | string | 发动机型号
+
+

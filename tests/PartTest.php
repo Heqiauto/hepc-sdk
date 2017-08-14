@@ -61,6 +61,13 @@ class PartTest extends TestCase
             UnitData::debugUrl($this->client));
     }
 
+    public function testGetSeriesFitsByPsn()
+    {
+        $this->part->getSeriesFitsByPsn(UnitData::$psn);
+        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/fits',
+            UnitData::debugUrl($this->client));
+    }
+
     public function testGetPartOe()
     {
         $this->part->getPartOe(UnitData::$psn);

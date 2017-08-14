@@ -38,16 +38,11 @@ class Part
         return $this->call('', ['action' => 'counts']);
     }
 
-    private function call($path = '', $params = [])
-    {
-        return $this->client->call('/categories/' . $this->categoryId . self::$base . $path, $params);
-    }
-
     /**
      * 通过配件品牌id获取品牌关联的配件列表.
      *
      * @param int $brandId 配件品牌Id
-     * @return object|bool part list
+     * @return array|bool part list
      */
     public function getPartsByBrandId($brandId)
     {
@@ -62,7 +57,7 @@ class Part
      * 通过车系id获取车型关联的配件列表.
      *
      * @param int $seriesId 车系Id
-     * @return object|bool part list
+     * @return array|bool part list
      */
     public function getPartsBySeriesId($seriesId)
     {
@@ -78,7 +73,7 @@ class Part
      *
      * @param int $modelId 车型Id
      * @param int $brandId 配件品牌Id (可选参数，用于筛选)
-     * @return object|bool part list
+     * @return array|bool part list
      */
     public function getPartsByCarModel($modelId, $brandId = null)
     {
@@ -89,13 +84,23 @@ class Part
         return $this->call('', ['model_id' => $modelId, 'brand_id' => $brandId]);
     }
 
+    /**
+     * 通过配件psn获取适配的车系列表
+     *
+     * @param string $psn 配件唯一编码
+     * @return array|bool part list
+     */
+    public function getSeriesFitsByPsn($psn)
+    {
+        return $this->call('/' . $psn . '/fits', ['type' => 'series']);
+    }
 
     /**
      * 分页查询所有配件.
      *
      * @param int $start 分页起始
      * @param int $limit 每页条数(默认10条)
-     * @return object part list
+     * @return array part list
      */
     public function getParts($start, $limit)
     {
@@ -106,7 +111,7 @@ class Part
      * 通过psn查询配件详情.
      *
      * @param string $psn 配件唯一编码
-     * @return object one part
+     * @return array one part
      */
     public function getPartByPsn($psn)
     {
@@ -117,7 +122,7 @@ class Part
      * 通过psn查询配件扩展属性.
      *
      * @param string $psn 配件唯一编码
-     * @return object part ext list
+     * @return array part ext list
      */
     public function getPartExt($psn)
     {
@@ -128,7 +133,7 @@ class Part
      * 通过psn查询配件Oe码.
      *
      * @param string $psn 配件唯一编码
-     * @return object one part oe
+     * @return array one part oe
      */
     public function getPartOe($psn)
     {
@@ -139,7 +144,7 @@ class Part
      * 通过psn查询配件uni码.
      *
      * @param string $psn 配件唯一编码
-     * @return object one part uni
+     * @return array one part uni
      */
     public function getPartUni($psn)
     {
@@ -150,10 +155,16 @@ class Part
      * 通过psn查询配件使用码.
      *
      * @param string $psn 配件唯一编码
-     * @return object one part usage
+     * @return array one part usage
      */
     public function getPartUsage($psn)
     {
         return $this->call('/' . $psn . '/indexes/usage');
+    }
+
+
+    private function call($path = '', $params = [])
+    {
+        return $this->client->call('/categories/' . $this->categoryId . self::$base . $path, $params);
     }
 }

@@ -18,8 +18,8 @@ class UnitData
 
     public static $brand_id = 4;
     public static $brand_name = '奥迪';
-    public static $manu_id = 4; //品牌id
-    public static $manu_name = '一汽大众(奥迪)'; //品牌id对应的名称
+    public static $sub_brand_id = 4; //品牌id
+    public static $sub_brand_name = '一汽大众(奥迪)'; //品牌id对应的名称
     public static $series_id = 9; //厂商id
     public static $series_name = 'A4'; //厂商id对应的名称
     public static $series_year_id = 3919; //车系id

@@ -23,29 +23,29 @@ class CarSeriesTest extends TestCase
     protected function setUp()
     {
         $this->client = UnitData::client();
-        $this->carSeries = new CarSeries($this->client, UnitData::$brand_id, UnitData::$manu_id);
+        $this->carSeries = new CarSeries($this->client, UnitData::$brand_id, UnitData::$sub_brand_id);
     }
 
     public function testGetSeries()
     {
         $this->carSeries->getSeries();
-        $this->assertEquals('/brands/' . UnitData::$brand_id . '/manus/' . UnitData::$manu_id . '/series',
+        $this->assertEquals('/brands/' . UnitData::$brand_id . '/sub-brands/' . UnitData::$sub_brand_id . '/series',
             UnitData::debugUrl($this->client));
     }
 
     public function testGetYearsBySeriesId()
     {
         $this->carSeries->getYearsBySeriesId(UnitData::$series_id);
-        $this->assertEquals('/brands/' . UnitData::$brand_id . '/manus/' . UnitData::$manu_id . '/series/' .
+        $this->assertEquals('/brands/' . UnitData::$brand_id . '/sub-brands/' . UnitData::$sub_brand_id . '/series/' .
             UnitData::$series_id . '/years',
             UnitData::debugUrl($this->client));
     }
 
-    public function testGetCapacityBySeriesId()
+    public function testGetDisplacementBySeriesId()
     {
-        $this->carSeries->getCapacitiesBySeriesId(UnitData::$series_id);
-        $this->assertEquals('/brands/' . UnitData::$brand_id . '/manus/' . UnitData::$manu_id . '/series/' .
-            UnitData::$series_id . '/capacities',
+        $this->carSeries->getDisplacementsBySeriesId(UnitData::$series_id);
+        $this->assertEquals('/brands/' . UnitData::$brand_id . '/sub-brands/' . UnitData::$sub_brand_id . '/series/' .
+            UnitData::$series_id . '/displacements',
             UnitData::debugUrl($this->client));
     }
 }

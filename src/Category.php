@@ -31,7 +31,7 @@ class Category
      * (可选参数: $categoryId)
      *
      * @param integer $categoryId 配件目录Id (不传id则为查询所有一级目录)
-     * @return object part categories list
+     * @return array part categories list
      */
     public function getCategories($categoryId = null)
     {
@@ -44,7 +44,7 @@ class Category
      * 获取该目录或节点详情
      *
      * @param integer $categoryId 配件目录或节点Id
-     * @return mixed
+     * @return array
      */
     public function getCategoryDetail($categoryId = null)
     {
@@ -55,7 +55,7 @@ class Category
      * 目录节点搜索
      *
      * @param string $query 搜索条件
-     * @return mixed
+     * @return array
      */
     public function getSearchCategory($query)
     {

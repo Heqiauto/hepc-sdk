@@ -24,7 +24,7 @@ class CategoryVirtual
      * 通过虚拟目录id获取该目录下的子目录和节点
      *
      * @param integer $categoryId 为空时返回一级目录
-     * @return mixed 包含本身目录信息和子集信息
+     * @return array 包含本身目录信息和子集信息
      */
     public function getCategoryVirtual($categoryId = NULL)
     {
@@ -37,7 +37,7 @@ class CategoryVirtual
      * 获取该虚拟目录详情
      *
      * @param integer $categoryId 配件虚拟目录Id
-     * @return mixed
+     * @return array
      */
     public function getCategoryVirtualDetail($categoryId = null)
     {

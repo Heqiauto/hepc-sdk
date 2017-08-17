@@ -65,7 +65,7 @@ class CarModel
 
     private function call($path = '', $params = [])
     {
-        return $this->client->call('/brands/' . $this->brandId . '/manus/' . $this->manuId . '/series/' . $this->seriesId . self::$base . $path,
+        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->manuId . '/series/' . $this->seriesId . self::$base . $path,
             $params);
     }
 

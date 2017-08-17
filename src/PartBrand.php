@@ -28,7 +28,7 @@ class PartBrand
     /**
      * 获取所有配件品牌.
      *
-     * @return object part brand list
+     * @return array part brand list
      */
     public function getPartBrands()
     {
@@ -44,7 +44,7 @@ class PartBrand
      * 通过品类id获取关联的配件品牌.
      *
      * @param int $categoryId 配件品类Id
-     * @return object|bool part brand list
+     * @return array|bool part brand list
      */
     public function getBrandsByCategoryId($categoryId)
     {

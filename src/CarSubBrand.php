@@ -9,14 +9,14 @@
  */
 
 
-class Hepc_SDK_CarManu
+class Hepc_SDK_CarSubBrand
 {
-    private static $base = '/manus';
+    private static $base = '/sub-brands';
     private $client = null;
     private $brandId = null;
 
     /**
-     * CarManu constructor.
+     * CarSubBrand constructor.
      *
      * @param object $client HepcClient对象
      * @param integer $brandId 汽车品牌Id
@@ -28,11 +28,11 @@ class Hepc_SDK_CarManu
     }
 
     /**
-     * 获取品牌下的厂商.
+     * 获取品牌下的子品牌.
      *
      * @return array carManus list
      */
-    public function getCarManus()
+    public function getCarSubBrands()
     {
         return $this->call();
     }

@@ -14,20 +14,20 @@ class Hepc_SDK_CarSeries
     private static $base = '/series';
     private $client = null;
     private $brandId = null;
-    private $manuId = null;
+    private $subBrandId = null;
 
     /**
      * CarSeries constructor.
      *
      * @param object $client HepcClient对象
      * @param integer $brandId 汽车品牌Id
-     * @param integer $manuId 汽车厂商Id
+     * @param integer $subBrandId 汽车子品牌Id
      */
-    public function __construct($client = null, $brandId = null, $manuId = null)
+    public function __construct($client = null, $brandId = null, $subBrandId = null)
     {
         $this->client = $client;
         $this->brandId = $brandId;
-        $this->manuId = $manuId;
+        $this->subBrandId = $subBrandId;
     }
 
     /**
@@ -42,7 +42,7 @@ class Hepc_SDK_CarSeries
 
     private function call($path = '', $params = array())
     {
-        return $this->client->call('/brands/' . $this->brandId . '/manus/' . $this->manuId . self::$base . $path,
+        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->subBrandId . self::$base . $path,
             $params);
     }
 
@@ -50,12 +50,12 @@ class Hepc_SDK_CarSeries
      * 通过车系id获得车系年款.
      *
      * @param integer $seriesId 车系Id
-     * @param integer $capacityId 可选参数（通过capacityId和seriesId筛选出对应的年款）
+     * @param integer $displacementId 可选参数（通过displacementId和seriesId筛选出对应的年款）
      * @return array series years list
      */
-    public function getYearsBySeriesId($seriesId, $capacityId = null)
+    public function getYearsBySeriesId($seriesId, $displacementId = null)
     {
-        return $this->call('/' . $seriesId . '/years', array('capacity_id' => $capacityId));
+        return $this->call('/' . $seriesId . '/years', array('displacement_id' => $displacementId));
     }
 
     /**
@@ -63,10 +63,10 @@ class Hepc_SDK_CarSeries
      *
      * @param integer $seriesId 车系Id
      * @param integer $yearId 可选参数（通过yearId和seriesId筛选出对应的排量）
-     * @return array series capacities list
+     * @return array series displacements list
      */
-    public function getCapacitiesBySeriesId($seriesId, $yearId = null)
+    public function getDisplacementsBySeriesId($seriesId, $yearId = null)
     {
-        return $this->call('/' . $seriesId . '/capacities', array('year_id' => $yearId));
+        return $this->call('/' . $seriesId . '/displacements', array('year_id' => $yearId));
     }
 }

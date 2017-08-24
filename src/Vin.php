@@ -29,11 +29,23 @@ class Vin
      * 通过vin码获取车型信息
      *
      * @param $vin
+     * @param integer $type 数据查询源类型选择,可选1，2(类型1失败时可以尝试类型2，默认类型1)
      * @return mixed
      */
-    public function getCarModelByVin($vin)
+    public function getCarModelByVin($vin, $type = 1)
     {
-        return $this->call('/' . $vin);
+        return $this->call('/' . $vin, ['type' => $type]);
+    }
+
+    /**
+     * 通过vin查询车型详情信息
+     *
+     * @param string $vin
+     * @return mixed
+     */
+    public function getCarModelDetailByVin($vin)
+    {
+        return $this->call('/' . $vin .'/detail');
     }
 
     private function call($path = '', $params = [])

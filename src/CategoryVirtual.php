@@ -44,6 +44,28 @@ class CategoryVirtual
         return $this->call('/' . $categoryId, ['detail' => true]);
     }
 
+    /**
+     * 获取该虚拟目录配件列表
+     *
+     * @param integer $categoryId 配件虚拟目录Id
+     * @param integer $brandId  配件品牌Id
+     * @param integer $modelId  车型Id
+     * @param array $pvIds  属性值数组
+     * @param integer $page  配件分页
+     * @param integer $limit  每页条数(默认10条)
+     * @return array
+     */
+    public function getPartList($categoryId = NULL, $brandId = NULL, $modelId = NULL, $pvIds = [], $page = NULL, $limit = 10)
+    {
+        return $this->call('/' . $categoryId . '/parts', [
+            'brand_id' => $brandId,
+            'model_id' => $modelId,
+            'pv_ids' => json_encode($pvIds),
+            'page' => $page,
+            'limit' => $limit,
+        ]);
+    }
+
     private function call($path = '', $params = [])
     {
         return $this->client->call('/groups/' . $this->groupId . self::$base . $path, $params);

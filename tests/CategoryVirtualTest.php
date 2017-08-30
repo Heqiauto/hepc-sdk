@@ -29,4 +29,13 @@ class CategoryVirtualTest extends TestCase
         $test->getCategoryVirtualDetail(UnitData::$category_virtual_id);
         $this->assertEquals('/groups/' . UnitData::$group_id . '/category-virtual/' . UnitData::$category_virtual_id, UnitData::debugUrl($client));
     }
+
+    public function testGetPartList()
+    {
+        $client = UnitData::client();
+        $test = new CategoryVirtual($client, UnitData::$group_id);
+        $test->getPartList(UnitData::$category_virtual_id, UnitData::$brand_id,
+            UnitData::$model_id, UnitData::$pv_ids, UnitData::$page, UnitData::$limit);
+        $this->assertEquals('/groups/' . UnitData::$group_id . '/category-virtual/' . UnitData::$category_virtual_id . '/parts', UnitData::debugUrl($client));
+    }
 }

@@ -47,6 +47,14 @@ class UnitData
     public static $vin = 'LVVDB12A6DD201624'; //Vin号
     public static $group_id = 31; //虚拟目录组id
     public static $category_virtual_id = 59; //虚拟目录id
+    public static $pv_ids = [
+        [
+            "property_id" => "7",
+            "property_value_id" => "159"
+        ]
+    ]; //属性和属性值数组
+    public static $page = 1; //页码
+    public static $limit = 10; //每页条数
 
     protected $config;
 

@@ -17,7 +17,7 @@ class CarBrandTest extends TestCase
     public function testGetCarBrands()
     {
         $client = UnitData::client();
-        $test = new CarBrand($client, UnitData::$brand_id);
+        $test = new CarBrand($client);
         $test->getCarBrands();
         $this->assertEquals('/brands', UnitData::debugUrl($client));
     }
@@ -25,7 +25,7 @@ class CarBrandTest extends TestCase
     public function testGetCarBrandsBySocket()
     {
         $client = UnitData::client(['connect' => 'socket']);
-        $test = new CarBrand($client, UnitData::$brand_id);
+        $test = new CarBrand($client);
         $test->getCarBrands();
         $this->assertEquals('/brands', UnitData::debugUrl($client));
     }

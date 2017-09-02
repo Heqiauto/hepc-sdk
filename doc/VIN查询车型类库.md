@@ -30,14 +30,16 @@ $ret = $vin->getCarModelByVin($vin, $type);
 ```php
 Array
 (
-    [model_id] => 23611
-    [brand_name] => 奥迪
-    [family_name] => 奥迪TT
-    [vehicle_name] => 2010款 奥迪 奥迪TT 三厢 2.0T 双离合变速器 典藏版 (AUDI TT 2.0TFSI COUPE)
-    [displacement] => 1.984
-    [year_pattern] => 2010
-    [gearbox_type] => 双离合变速器
-    [engine_model] => 德国奥迪BWA
+    [mikey] => MIB020593A002
+    [model_id] =>
+    [brand_name] => 宝马(进口)
+    [family_name] => X6 xDrive35i
+    [sales_desig] => 3.0T 手自一体
+    [vehicle_name] =>
+    [displacement] => 3.0
+    [year_pattern] => 2008
+    [gearbox_type] => 手自一体变速器(AMT)
+    [engine_model] => N54B30A
 )
 ```
 
@@ -45,9 +47,11 @@ Array
 
 参数 | 类型 | 说明
 --- | --- | ---
+**mikey** | string | mikey
 **model_id** | int | 车型id
 **brand_name** | string | 汽车品牌名
 **family_name** | string | 车系名称
+**sales_desig** | string | 销售名称
 **vehicle_name** | string | 车型名称
 **displacement** | string | 排量
 **year_pattern** | string | 年款

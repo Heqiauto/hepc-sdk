@@ -24,8 +24,8 @@ class UnitData
     public static $series_name = 'A4'; //厂商id对应的名称
     public static $series_year_id = 3919; //车系id
     public static $series_year_value = '2016';
-    public static $series_capacity_id = 16; //车系id
-    public static $series_capacity_value = '2';
+    public static $series_displacement_id = 16; //车系id
+    public static $series_displacement_value = '2';
     public static $model_id = 23323; //车型id
     public static $model_name = 'A4L';
     public static $category_id = 30; //车型Id

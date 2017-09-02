@@ -15,7 +15,7 @@ class CarModel
     private static $base = '/models';
     private $client = null;
     private $brandId = null;
-    private $manuId = null;
+    private $subBrandId = null;
     private $seriesId = null;
 
     /**
@@ -23,14 +23,14 @@ class CarModel
      *
      * @param object  $client   HepcClient对象
      * @param integer $brandId  汽车品牌Id
-     * @param integer $manuId   汽车厂商Id
+     * @param integer $subBrandId   汽车子品牌Id
      * @param integer $seriesId 车系Id
      */
-    public function __construct($client = null, $brandId = null, $manuId = null, $seriesId = null)
+    public function __construct($client = null, $brandId = null, $subBrandId = null, $seriesId = null)
     {
         $this->client = $client;
         $this->brandId = $brandId;
-        $this->manuId = $manuId;
+        $this->subBrandId = $subBrandId;
         $this->seriesId = $seriesId;
     }
 
@@ -42,7 +42,7 @@ class CarModel
      * @param integer $yearId     年款Id
      * @param integer $capacityId 排量Id
      * @param string $year_order 按年款的排序类型("ASC"：正序；"DESC"：倒序；默认为倒序，先显示最新的年款)
-     * @return object carModels list
+     * @return array carModels list
      */
     public function getModels($yearId = null, $capacityId = null, $year_order = null)
     {
@@ -56,7 +56,7 @@ class CarModel
      * 通过车型id获取车型详情.
      *
      * @param integer $modelId 车型Id
-     * @return object one carModel detail
+     * @return array one carModel detail
      */
     public function getModelById($modelId = null)
     {
@@ -65,7 +65,7 @@ class CarModel
 
     private function call($path = '', $params = [])
     {
-        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->manuId . '/series/' . $this->seriesId . self::$base . $path,
+        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->subBrandId . '/series/' . $this->seriesId . self::$base . $path,
             $params);
     }
 

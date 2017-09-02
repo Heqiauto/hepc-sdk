@@ -15,20 +15,20 @@ class CarSeries
     private static $base = '/series';
     private $client = null;
     private $brandId = null;
-    private $subBrand = null;
+    private $subBrandId = null;
 
     /**
      * CarSeries constructor.
      *
      * @param object  $client  HepcClient对象
      * @param integer $brandId 汽车品牌Id
-     * @param integer $subBrand  汽车子品牌Id
+     * @param integer $subBrandId  汽车子品牌Id
      */
-    public function __construct($client = null, $brandId = null, $subBrand = null)
+    public function __construct($client = null, $brandId = null, $subBrandId = null)
     {
         $this->client = $client;
         $this->brandId = $brandId;
-        $this->subBrand = $subBrand;
+        $this->subBrandId = $subBrandId;
     }
 
     /**
@@ -43,7 +43,7 @@ class CarSeries
 
     private function call($path = '', $params = [])
     {
-        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->subBrand . self::$base . $path,
+        return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->subBrandId . self::$base . $path,
             $params);
     }
 

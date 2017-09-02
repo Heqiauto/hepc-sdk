@@ -10,7 +10,7 @@ class OcrTest extends TestCase
     public function testGetPlateByOcr()
     {
         $client = UnitData::client();
-        $test = new Ocr($client, UnitData::$brand_id);
+        $test = new Ocr($client);
         $test->getPlateByOcr(UnitData::getBase64(UnitData::$plate_url));
         $this->assertEquals('/ocr/plate', UnitData::debugUrl($client));
     }
@@ -18,7 +18,7 @@ class OcrTest extends TestCase
     public function testGetVinByOcr()
     {
         $client = UnitData::client();
-        $test = new Ocr($client, UnitData::$brand_id);
+        $test = new Ocr($client);
         $test->getVinByOcr(UnitData::getBase64(UnitData::$vin_url));
         $this->assertEquals('/ocr/vin', UnitData::debugUrl($client));
     }

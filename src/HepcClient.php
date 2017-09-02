@@ -701,8 +701,9 @@ class HepcClient
 
         if (isset($resp_arr['success']) && $resp_arr['success'] == 'true') {
             return $resp_arr['result'];
+
         } else {
-            throw new Exception("Errorcode:" . $resp_arr['errors'][0]['error_code'] . "#" . $resp_arr['errors'][0]['error_msg']);
+            throw new Exception("Errorcode:" . $resp_arr['errors'][0]['error_code'] . "#" . $resp_arr['errors'][0]['error_msg'], $resp_arr['errors'][0]['error_code']);
         }
     }
 }

@@ -29,7 +29,7 @@ class Vin
      * 通过vin码获取车型信息
      *
      * @param $vin
-     * @param integer $type 数据查询源类型选择,可选1，2(类型1失败时可以尝试类型2，默认类型1)
+     * @param integer $type 数据查询源类型选择,可选1，2, 3(类型1失败时可以尝试类型2,3，默认类型1)
      * @return mixed
      */
     public function getCarModelByVin($vin, $type = 1)

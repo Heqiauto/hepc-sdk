@@ -28,7 +28,7 @@ class CarModelTest extends TestCase
 
     public function testGetModels()
     {
-        $this->carModel->getModels(UnitData::$series_year_id, UnitData::$series_capacity_id);
+        $this->carModel->getModels(UnitData::$series_year_id, UnitData::$series_displacement_id);
         $this->assertEquals('/brands/' . UnitData::$brand_id . '/sub-brands/' . UnitData::$sub_brand_id . '/series/'.
             UnitData::$series_id . '/models',
             UnitData::debugUrl($this->client));

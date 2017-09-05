@@ -35,7 +35,6 @@ Array
             [0] => Array
                 (
                     [model_id] => 22162
-                    [mikey] => MIF012468B003
                     [brand_name] => 福特
                     [family_name] => 福克斯
                     [sales_desig] => 1.8 手动 舒适型
@@ -63,7 +62,6 @@ Array
 参数 | 类型 | 说明
 --- | --- | ---
 **model_id** | int | 车型id
-**mikey** | string | mikey
 **brand_name** | string | 汽车品牌名
 **family_name** | string | 车系名称
 **sales_desig** | string | 销售名称

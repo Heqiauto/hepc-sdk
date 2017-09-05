@@ -30,25 +30,40 @@ $ret = $vin->getCarModelByVin($vin, $type);
 ```php
 Array
 (
-    [mikey] => MIB020593A002
-    [model_id] =>
-    [brand_name] => 宝马(进口)
-    [family_name] => X6 xDrive35i
-    [sales_desig] => 3.0T 手自一体
-    [vehicle_name] =>
-    [displacement] => 3.0
-    [year_pattern] => 2008
-    [gearbox_type] => 手自一体变速器(AMT)
-    [engine_model] => N54B30A
+    [models] => Array
+        (
+            [0] => Array
+                (
+                    [model_id] => 22162
+                    [mikey] => MIF012468B003
+                    [brand_name] => 福特
+                    [family_name] => 福克斯
+                    [sales_desig] => 1.8 手动 舒适型
+                    [vehicle_name] => 福克斯-三厢
+                    [displacement] => 1.8
+                    [year_pattern] => 2007
+                    [gearbox_type] => 手动
+                    [engine_model] => CAF483Q0
+                )
+
+        )
+
+    [meta] => Array
+        (
+            [vin] => LVSFCFME37F107967
+            [is_valid] => true
+        )
+
 )
+
 ```
 
 ##### 参数说明
 
 参数 | 类型 | 说明
 --- | --- | ---
-**mikey** | string | mikey
 **model_id** | int | 车型id
+**mikey** | string | mikey
 **brand_name** | string | 汽车品牌名
 **family_name** | string | 车系名称
 **sales_desig** | string | 销售名称
@@ -57,6 +72,9 @@ Array
 **year_pattern** | string | 年款
 **gearbox_type** | string | 变速箱类型
 **engine_model** | string | 发动机型号
+**vin** | string | Vin号
+**is_valid** | string | vin号是否合法
+
 
 ## 通过vin码获取车型信息
 

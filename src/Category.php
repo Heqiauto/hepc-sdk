@@ -5,7 +5,7 @@
  * @copyright 2017. Heqiauto Inc.
  * @license   https://opensource.org/licenses/Apache-2.0
  * @link      https://github.com/Heqiauto/hepc-sdk
- * @version   1.2.3
+ * @version   1.2.4
  */
 
 namespace Heqiauto\HepcSdk;
@@ -60,6 +60,17 @@ class Category
     public function getSearchCategory($query)
     {
         return $this->call('/' . $query . '/search');
+    }
+
+    /**
+     * 目录节点搜索(含拼音匹配)
+     *
+     * @param string $query 搜索条件
+     * @return array
+     */
+    public function getSearchEnhanced($query)
+    {
+        return $this->call('/' . $query . '/search-enhanced');
     }
 
     private function call($path = '', $params = [])

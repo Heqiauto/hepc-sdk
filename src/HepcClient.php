@@ -5,7 +5,7 @@
  * @copyright 2017. Heqiauto Inc.
  * @license   https://opensource.org/licenses/Apache-2.0
  * @link      https://github.com/Heqiauto/hepc-sdk
- * @version   1.2.3
+ * @version   1.2.4
  */
 
 namespace Heqiauto\HepcSdk;
@@ -85,7 +85,7 @@ class HepcClient
      *
      * @var string
      */
-    private $sdk_version = '1.2.3';
+    private $sdk_version = '1.2.4';
 
     /**
      * 请求API的时间，单位为秒.
@@ -237,6 +237,7 @@ class HepcClient
      * @param array  $params 当前请求的所有参数数组.
      * @param string $method 当前请求的方法。默认值为:GET
      * @return string 返回获取的结果.
+     * @throws Exception
      * @donotgeneratedoc
      */
     public function call($path, $params = [], $method = self::METHOD)
@@ -540,6 +541,7 @@ class HepcClient
     {
         $strLength = '';
         $content = '';
+        $parse = [];
 
         if ($info['method'] == self::METHOD_GET) {
             $data = ltrim($data, '&');
@@ -688,6 +690,9 @@ class HepcClient
         return $data;
     }
 
+    /**
+     * @return float
+     */
     protected function get_microtime()
     {
         list($usec, $sec) = explode(" ", microtime());
@@ -695,6 +700,11 @@ class HepcClient
         return floor(((float)$usec + (float)$sec) * 1000);
     }
 
+    /**
+     * @param $resp
+     * @return mixed
+     * @throws Exception
+     */
     protected function _parse_response_curl($resp)
     {
         $resp_arr = json_decode($resp, true);

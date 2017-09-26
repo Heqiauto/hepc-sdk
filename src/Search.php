@@ -5,7 +5,7 @@
  * @copyright 2017. Heqiauto Inc.
  * @license   https://opensource.org/licenses/Apache-2.0
  * @link      https://github.com/Heqiauto/hepc-sdk
- * @version   1.2.3
+ * @version   1.2.4
  */
 
 namespace Heqiauto\HepcSdk;
@@ -48,11 +48,26 @@ class Search
      */
     public function getSearchList($query = null)
     {
-        if ($query === null) {
+        if (empty($query)) {
             return null;
         }
 
         return $this->call('', ['query' => $query, 'action' => 'list']);
+    }
+
+    /**
+     * 通过查询码搜索配件
+     *
+     * @param string $query
+     * @return array
+     */
+    public function searchByIndexCode($query = null)
+    {
+        if (empty($query)) {
+            return null;
+        }
+
+        return $this->call('/index-code', ['query' => $query]);
     }
 
     private function call($path = '', $params = [])

@@ -37,4 +37,12 @@ class CategoryTest extends TestCase
         $test->getCategoryDetail(UnitData::$category_id);
         $this->assertEquals('/categories/' . UnitData::$category_id, UnitData::debugUrl($client));
     }
+
+    public function testSearchEnhanced()
+    {
+        $client = UnitData::client();
+        $test = new Category($client);
+        $test->getSearchEnhanced(UnitData::$category_child_name);
+        $this->assertEquals('/categories/' . UnitData::$category_child_name . '/search-enhanced', UnitData::debugUrl($client));
+    }
 }

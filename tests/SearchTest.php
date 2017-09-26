@@ -41,4 +41,11 @@ class SearchTest extends TestCase
         $this->assertEquals('car', UnitData::debugQuery($this->client, 'query'));
         $this->assertEquals('list', UnitData::debugQuery($this->client, 'action'));
     }
+
+    public function testSearchByIndexCode()
+    {
+        $this->search->searchByIndexCode('0 986 424 570');
+        $this->assertEquals('/search/index-code', UnitData::debugUrl($this->client));
+        $this->assertEquals('0 986 424 570', UnitData::debugQuery($this->client, 'query'));
+    }
 }

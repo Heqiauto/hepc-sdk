@@ -30,7 +30,7 @@ $brands = $carBrand->getCarBrands();
 Documents
 ----------
 
-[API Documents](doc/index.md)
+[API Documents](doc/index.md) [Release Log](RELEASE.md)
 
 License
 -------

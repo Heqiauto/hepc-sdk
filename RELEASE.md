@@ -2,6 +2,11 @@
 
 ***`注: 未特殊注明的更新皆为兼容之前版本的更新`***
 
+#### 2017-10-14 V1.2.6
+
++ 添加[Release log](RELEASE.md)
++ 添加[ErrorCode description](doc/ErrorCode.md)
+
 #### 2017-10-13 V1.2.5
 
 + 添加配件库存查询功能

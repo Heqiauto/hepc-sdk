@@ -68,24 +68,17 @@ class PartTest extends TestCase
             UnitData::debugUrl($this->client));
     }
 
-    public function testGetPartOe()
+    public function testGetBrandReplacement()
     {
-        $this->part->getPartOe(UnitData::$psn);
-        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/indexes/oe',
+        $this->part->getBrandReplacement(UnitData::$psn);
+        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/replacements/brand',
             UnitData::debugUrl($this->client));
     }
 
-    public function testGetPartUni()
+    public function testGetOriginalReplacement()
     {
-        $this->part->getPartUni(UnitData::$psn);
-        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/indexes/uni',
-            UnitData::debugUrl($this->client));
-    }
-
-    public function testGetPartUsage()
-    {
-        $this->part->getPartUsage(UnitData::$psn);
-        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/indexes/usage',
+        $this->part->getOriginalReplacement(UnitData::$psn);
+        $this->assertEquals('/categories/' . UnitData::$category_child_id . '/parts/' . UnitData::$psn . '/replacements/original',
             UnitData::debugUrl($this->client));
     }
 }

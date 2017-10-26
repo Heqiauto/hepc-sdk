@@ -129,38 +129,26 @@ class Part
     }
 
     /**
-     * 通过psn查询配件Oe码.
+     * 获取配件的品牌替换件
      *
-     * @param string $psn 配件唯一编码
-     * @return array one part oe
+     * @param $psn
+     * @return mixed
      */
-    public function getPartOe($psn)
+    public function getBrandReplacement($psn)
     {
-        return $this->call('/' . $psn . '/indexes/oe');
+        return $this->call('/' . $psn . '/replacements/brand');
     }
 
     /**
-     * 通过psn查询配件uni码.
+     * 获取配件的原厂替换件
      *
-     * @param string $psn 配件唯一编码
-     * @return array one part uni
+     * @param $psn
+     * @return mixed
      */
-    public function getPartUni($psn)
+    public function getOriginalReplacement($psn)
     {
-        return $this->call('/' . $psn . '/indexes/uni');
+        return $this->call('/' . $psn . '/replacements/original');
     }
-
-    /**
-     * 通过psn查询配件使用码.
-     *
-     * @param string $psn 配件唯一编码
-     * @return array one part usage
-     */
-    public function getPartUsage($psn)
-    {
-        return $this->call('/' . $psn . '/indexes/usage');
-    }
-
 
     private function call($path = '', $params = [])
     {

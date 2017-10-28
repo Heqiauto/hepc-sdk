@@ -30,12 +30,15 @@ $ret = $vin->getCarModelByVin($vin, $type);
 ```php
 Array
 (
+Array
+(
     [models] => Array
         (
             [0] => Array
                 (
                     [model_id] => 22162
                     [brand_name] => 福特
+                    [manu_name] => 长安福特马自达
                     [family_name] => 福克斯
                     [sales_desig] => 1.8 手动 舒适型
                     [vehicle_name] => 福克斯-三厢
@@ -43,6 +46,15 @@ Array
                     [year_pattern] => 2007
                     [gearbox_type] => 手动
                     [engine_model] => CAF483Q0
+                    [fuel_type] => 汽油
+                    [trans_desc] => 手动变速器(MT)
+                    [gears_num] => 5
+                    [front_tyre_spec] => 195/65 R15
+                    [rear_tyre_spec] => 195/65 R15
+                    [sales_version] => 舒适型
+                    [hub_material] => 铝合金
+                    [drive_system] => 前置前驱
+                    [multi_model] => 1
                 )
 
         )
@@ -53,8 +65,8 @@ Array
             [is_valid] => true
         )
 
-)
 
+)
 ```
 
 ##### 参数说明
@@ -63,6 +75,7 @@ Array
 --- | --- | ---
 **model_id** | int | 车型id
 **brand_name** | string | 汽车品牌名
+**manu_name** | string | 汽车子品牌名
 **family_name** | string | 车系名称
 **sales_desig** | string | 销售名称
 **vehicle_name** | string | 车型名称
@@ -70,6 +83,16 @@ Array
 **year_pattern** | string | 年款
 **gearbox_type** | string | 变速箱类型
 **engine_model** | string | 发动机型号
+**fuel_type** | string | 燃油类型
+**trans_desc** | string | 变速器描述
+**gears_num** | string | 档位数
+**front_tyre_spec** | string | 前轮胎规格
+**rear_tyre_spec** | string | 后轮胎规格
+**sales_version** | string | 销售版本
+**hub_material** | string | 轮毂材料
+**drive_system** | string | 驱动形式
+**multi_model** | integer | 是否匹配多个车型(1,2) 2表示多个 
+
 **vin** | string | Vin号
 **is_valid** | string | vin号是否合法
 

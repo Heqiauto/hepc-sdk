@@ -15,6 +15,11 @@ class Vin
     private $client = null;
 
     /**
+     * @var bool
+     */
+    protected $_cache = true;
+
+    /**
      * Category constructor.
      *
      * @param object $client HepcClient对象
@@ -22,6 +27,16 @@ class Vin
     public function __construct($client = null)
     {
         $this->client = $client;
+    }
+
+    /**
+     * 是否读取缓存数据
+     *
+     * @param bool $cache
+     */
+    public function setCache($cache)
+    {
+        $this->_cache = $cache;
     }
 
     /**
@@ -33,7 +48,7 @@ class Vin
      */
     public function getCarModelByVin($vin, $type = 1)
     {
-        return $this->call('/' . $vin, ['type' => $type]);
+        return $this->call('/' . $vin, ['type' => $type, 'cache' => $this->_cache]);
     }
 
     /**

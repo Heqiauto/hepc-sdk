@@ -30,8 +30,6 @@ $ret = $vin->getCarModelByVin($vin, $type);
 ```php
 Array
 (
-Array
-(
     [models] => Array
         (
             [0] => Array
@@ -45,6 +43,7 @@ Array
                     [displacement] => 1.8
                     [year_pattern] => 2007
                     [gearbox_type] => 手动
+                    [chassis_num] => E71
                     [engine_model] => CAF483Q0
                     [fuel_type] => 汽油
                     [trans_desc] => 手动变速器(MT)
@@ -53,6 +52,7 @@ Array
                     [rear_tyre_spec] => 195/65 R15
                     [sales_version] => 舒适型
                     [hub_material] => 铝合金
+                    [aspirated_way] => 机械增压
                     [drive_system] => 前置前驱
                     [multi_model] => 1
                 )

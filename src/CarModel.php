@@ -36,19 +36,19 @@ class CarModel
     /**
      * 获取所有车型列表.
      *
-     * （可选参数:yearId,capacityId）
+     * （可选参数:yearId,displacement）
      *
      * @param integer $yearId     年款Id
-     * @param integer $capacityId 排量Id
+     * @param integer $displacement 排量Id
      * @param string $year_order 按年款的排序类型("ASC"：正序；"DESC"：倒序；默认为倒序，先显示最新的年款)
      * @return array carModels list
      */
-    public function getModels($yearId = null, $capacityId = null, $year_order = null)
+    public function getModels($yearId = null, $displacement = null, $year_order = null)
     {
         if($yearId === '') $yearId = null;
 
-        if($capacityId === '') $capacityId = null;
-        return $this->call('', ['year_id' => $yearId, 'capacity_id' => $capacityId, 'year_order' => $year_order,]);
+        if($displacement === '') $displacement = null;
+        return $this->call('', ['year_id' => $yearId, 'displacement_id' => $displacement, 'year_order' => $year_order,]);
     }
 
     /**

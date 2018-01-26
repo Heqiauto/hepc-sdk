@@ -69,6 +69,31 @@ class Search
         return $this->call('/index-code', ['query' => $query]);
     }
 
+    /**
+     * 通过出厂编码和规格型号搜索配件
+     *
+     * @param string $query
+     * @param integer $categoryId
+     * @param integer $groupId
+     * @param integer $page
+     * @param integer $pagesize
+     * @return array | null
+     */
+    public function searchPart($query, $categoryId = null, $groupId = null, $page = null, $pagesize = 10)
+    {
+        if (empty($query)) {
+            return null;
+        }
+
+        return $this->call('/search-part', [
+            'query' => $query,
+            'category_id' => $categoryId,
+            'group_id' => $groupId,
+            'page' => $page,
+            'page_size' => $pagesize,
+            ]);
+    }
+
     private function call($path = '', $params = [])
     {
         return $this->client->call(self::$base . $path, $params);

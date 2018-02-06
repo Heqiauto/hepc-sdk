@@ -9,12 +9,15 @@ Hepc SDK
 
 Sdk client for Heqiauto-epc service.
 
-Install
---------
+Installation
+------------
+It's recommended that you use [Composer](https://getcomposer.org/) to install this project.
 
-```shell
+```bash
 composer require heqiauto/hepc-sdk
 ```
+
+This will install the library and all required dependencies. The library requires PHP 5.5 or newer.
 
 Usage
 -----
@@ -31,7 +34,8 @@ $brands = $carBrand->getCarBrands();
 Documents
 ----------
 
-[API Documents](doc/README.md) [Release Log](RELEASE.md)
++ [API Documents](doc/README.md)
++ [Release Log](RELEASE.md)
 
 License
 -------

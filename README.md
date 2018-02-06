@@ -1,6 +1,7 @@
 Hepc SDK
 ========
 [![Build Status](https://travis-ci.org/Heqiauto/hepc-sdk.svg)](https://travis-ci.org/Heqiauto/hepc-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/Heqiauto/hepc-sdk/badge.svg?branch=master)](https://coveralls.io/github/Heqiauto/hepc-sdk?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/Heqiauto/hepc-sdk/v/stable.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
 [![Total Downloads](https://poser.pugx.org/Heqiauto/hepc-sdk/downloads.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
 [![Latest Unstable Version](https://poser.pugx.org/Heqiauto/hepc-sdk/v/unstable.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
@@ -30,7 +31,7 @@ $brands = $carBrand->getCarBrands();
 Documents
 ----------
 
-[API Documents](doc/index.md) [Release Log](RELEASE.md)
+[API Documents](doc/README.md) [Release Log](RELEASE.md)
 
 License
 -------

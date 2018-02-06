@@ -1,12 +1,16 @@
 {
   "name": "heqiauto/hepc-sdk",
-  "description": "Sdk client for Heqiauto-epc service",
+  "description": "Sdk  client  for  Heqiauto-epc  service",
   "type": "library",
   "license": "Apache-2.0",
   "authors": [
     {
-      "name": "YanChao Ye",
+      "name": "YanChao  Ye",
       "email": "yeyanchao@gmail.com"
+    },
+    {
+      "name": "Zaisen Liu",
+      "email": "qianmiansen@outlook.com"
     }
   ],
   "minimum-stability": "stable",
@@ -25,6 +29,11 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
     }
   }
 }

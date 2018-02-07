@@ -60,9 +60,10 @@ class CategoryVirtual
      * @param array $pvIds  属性值数组
      * @param integer $page  配件分页
      * @param integer $limit  每页条数(默认10条)
+     * @param integer $seriesId  车系Id
      * @return array
      */
-    public function getPartList($categoryId = NULL, $brandId = NULL, $modelId = NULL, $pvIds = [], $page = NULL, $limit = 10)
+    public function getPartList($categoryId = NULL, $brandId = NULL, $modelId = NULL, $pvIds = [], $page = NULL, $limit = 10, $seriesId = NULL)
     {
         return $this->call('/' . $categoryId . '/parts', [
             'brand_id' => $brandId,
@@ -70,6 +71,7 @@ class CategoryVirtual
             'pv_ids' => json_encode($pvIds),
             'page' => $page,
             'limit' => $limit,
+            'series_id' => $seriesId,
         ]);
     }
 

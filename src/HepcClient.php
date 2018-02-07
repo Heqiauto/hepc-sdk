@@ -85,7 +85,7 @@ class HepcClient
      *
      * @var string
      */
-    private $sdk_version = '1.3.0';
+    private $sdk_version = '1.3.1';
 
     /**
      * 请求API的时间，单位为秒.

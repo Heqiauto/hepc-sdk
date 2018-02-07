@@ -1,6 +1,7 @@
 Hepc SDK
 ========
 [![Build Status](https://travis-ci.org/Heqiauto/hepc-sdk.svg)](https://travis-ci.org/Heqiauto/hepc-sdk)
+[![Coverage Status](https://coveralls.io/repos/github/Heqiauto/hepc-sdk/badge.svg?branch=master)](https://coveralls.io/github/Heqiauto/hepc-sdk?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/Heqiauto/hepc-sdk/v/stable.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
 [![Total Downloads](https://poser.pugx.org/Heqiauto/hepc-sdk/downloads.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
 [![Latest Unstable Version](https://poser.pugx.org/Heqiauto/hepc-sdk/v/unstable.svg)](https://packagist.org/packages/Heqiauto/hepc-sdk) 
@@ -8,12 +9,15 @@ Hepc SDK
 
 Sdk client for Heqiauto-epc service.
 
-Install
---------
+Installation
+------------
+It's recommended that you use [Composer](https://getcomposer.org/) to install this project.
 
-```shell
+```bash
 composer require heqiauto/hepc-sdk
 ```
+
+This will install the library and all required dependencies. The library requires PHP 5.5 or newer.
 
 Usage
 -----
@@ -30,7 +34,8 @@ $brands = $carBrand->getCarBrands();
 Documents
 ----------
 
-[API Documents](doc/index.md) [Release Log](RELEASE.md)
++ [API Documents](doc/README.md)
++ [Release Log](RELEASE.md)
 
 License
 -------

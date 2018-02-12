@@ -94,6 +94,21 @@ class Search
             ]);
     }
 
+    /**
+     * 复合搜索，输出车系，品牌，配件，品类匹配项
+     *
+     * @param null $query
+     * @return null
+     */
+    public function advancedSearch($query = null)
+    {
+        if ($query === null) {
+            return null;
+        }
+
+        return $this->call('/advanced-search', ['query' => $query]);
+    }
+
     private function call($path = '', $params = [])
     {
         return $this->client->call(self::$base . $path, $params);

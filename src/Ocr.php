@@ -27,23 +27,23 @@ class Ocr
     /**
      * 识别图片中的vin码(使用前先将图片按base64编码)
      *
-     * @param string $ocr base64码
+     * @param string $fileData base64码
      * @return mixed
      */
-    public function getVinByOcr($ocr)
+    public function getVinByOcr($fileData)
     {
-        return $this->call('/vin', ['file_data' => $ocr], 'POST');
+        return $this->call('/vin', ['file_data' => $fileData], 'POST');
     }
 
     /**
      * 识别图片中的车牌号(使用前先将图片按base64编码)
      *
-     * @param string $ocr base64码
+     * @param string $fileData base64码
      * @return mixed
      */
-    public function getPlateByOcr($ocr)
+    public function getPlateByOcr($fileData)
     {
-        return $this->call('/plate', ['file_data' => $ocr], 'POST');
+        return $this->call('/plate', ['file_data' => $fileData], 'POST');
     }
 
     private function call($path = '', $params = [], $method = '')

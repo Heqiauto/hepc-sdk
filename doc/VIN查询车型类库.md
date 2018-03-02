@@ -23,7 +23,8 @@ $vin = new Vin($client); //创建实例对象
 ```php
 $client = new HepcClient($host, $key, $secret, $opts);
 $vin = new Vin($client);
-$ret = $vin->getCarModelByVin($vin, $type);
+$vin->setCache(true);
+$ret = $vin->getCarModelByVin($vin, $type, $detail);//$detail默认为0不返回详细信息，传1可返回详细信息
 ```
 
 #### 返回示例
@@ -91,7 +92,7 @@ Array
 **sales_version** | string | 销售版本
 **hub_material** | string | 轮毂材料
 **drive_system** | string | 驱动形式
-**multi_model** | integer | 是否匹配多个车型(1,2) 2表示多个 
+**multi_model** | integer | 是否匹配多个车型(1,2) 2表示多个
 
 **vin** | string | Vin号
 **is_valid** | string | vin号是否合法
@@ -147,10 +148,8 @@ Array
 **trans_type** | string | 变速箱类型
 **engine_code** | string | 发动机型号
 **structure** | string | 车身形式
-**drive_system** | string | 驱动形式 
+**drive_system** | string | 驱动形式
 **chassis_num** | string | 底盘号
 **const_from** | string | 生产年份
 **manu_type** | string | 厂商类型(国产/合资/进口)
 **sales_desig** | string | 销售名称
-
-

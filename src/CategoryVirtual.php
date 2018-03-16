@@ -41,6 +41,16 @@ class CategoryVirtual
     }
 
     /**
+     * 通过虚拟目录id获取该目录下品类菜单
+     *
+     * @return array 包含本身目录信息和子集信息
+     */
+    public function getCategoryMenu()
+    {
+        return $this->call('', ['resource' => 'menu']);
+    }
+
+    /**
      * 获取该虚拟目录详情
      *
      * @param integer $categoryId 配件虚拟目录Id
@@ -72,6 +82,24 @@ class CategoryVirtual
             'page' => $page,
             'limit' => $limit,
             'series_id' => $seriesId,
+        ]);
+    }
+
+    /**
+     * 获取该虚拟目录拓展属性列表
+     *
+     * @param integer $categoryId 配件虚拟目录Id
+     * @param integer $brandId  配件品牌Id
+     * @param integer $modelId  车型Id
+     * @param array $pvIds  属性值数组
+     * @return array
+     */
+    public function getPartExt($categoryId = NULL, $brandId = NULL, $modelId = NULL, $pvIds = [])
+    {
+        return $this->call('/' . $categoryId . '/part-exts', [
+            'brand_id' => $brandId,
+            'model_id' => $modelId,
+            'pv_ids' => json_encode($pvIds),
         ]);
     }
 

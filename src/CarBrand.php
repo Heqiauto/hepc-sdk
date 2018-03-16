@@ -34,6 +34,17 @@ class CarBrand
         return $this->call();
     }
 
+
+    /**
+     * 获取汽车品牌列表按首字母分组.
+     *
+     * @return array carBrands list
+     */
+    public function getBrandsLetter()
+    {
+        return $this->call('', ['group_by' => 'first_letter']);
+    }
+
     private function call($path = '', $params = [])
     {
         return $this->client->call(self::$base . $path, $params);

@@ -91,22 +91,23 @@ class Search
             'group_id' => $groupId,
             'page' => $page,
             'page_size' => $pagesize,
-            ]);
+        ]);
     }
 
     /**
      * 复合搜索，输出车系，品牌，配件，品类匹配项
      *
      * @param null $query
+     * @param null $type 指定搜索类型(part,part_brand,car_series,part_category_virtual)
      * @return null
      */
-    public function advancedSearch($query = null)
+    public function advancedSearch($query = null, $type = null)
     {
         if ($query === null) {
             return null;
         }
 
-        return $this->call('/advanced-search', ['query' => $query]);
+        return $this->call('/advanced-search', ['query' => $query, 'type' => $type]);
     }
 
     private function call($path = '', $params = [])

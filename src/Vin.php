@@ -40,6 +40,18 @@ class Vin
     }
 
     /**
+     * 获取 VIN 对应的多个车型
+     *
+     * @since 1.3.4
+     * @param string $vin
+     * @return mixed
+     */
+    public function getCarModels($vin)
+    {
+        return $this->call('/' . $vin . '/car-models');
+    }
+
+    /**
      * 通过vin码获取车型信息
      *
      * @param string $vin

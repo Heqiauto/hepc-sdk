@@ -40,11 +40,10 @@ class Ocr
      * @param $fileData
      * @return mixed
      */
-    public function getVinro($fileData)
+    public function getVinPro($fileData)
     {
         return $this->call('/vin-pro', ['file_data' => $fileData], 'POST');
     }
-
 
 
     /**

@@ -36,6 +36,18 @@ class Ocr
     }
 
     /**
+     * 识别图片中的vin码支持行驶证(使用前先将图片base64编码)
+     * @param $fileData
+     * @return mixed
+     */
+    public function getVinro($fileData)
+    {
+        return $this->call('/vin-pro', ['file_data' => $fileData], 'POST');
+    }
+
+
+
+    /**
      * 识别图片中的车牌号(使用前先将图片按base64编码)
      *
      * @param string $fileData base64码

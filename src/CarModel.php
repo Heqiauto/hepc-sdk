@@ -72,16 +72,7 @@ class CarModel
     {
         return $this->callBack('/' . $vin);
     }
-
-    /**通过vin查询车型信息
-     * @param null $vin
-     * @return mixed
-     */
-    public function getCarModelByVin($vin = null)
-    {
-        return $this->callBack('/'.$vin.'/car-models');
-    }
-
+    
     /**
      * 识别照片解析vin获取车型信息
      * @param $fileData

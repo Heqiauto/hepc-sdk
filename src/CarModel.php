@@ -72,7 +72,7 @@ class CarModel
     {
         return $this->callBack('/' . $vin);
     }
-    
+
     /**
      * 识别照片解析vin获取车型信息
      * @param $fileData
@@ -85,8 +85,7 @@ class CarModel
 
     
     private  function callBack($path = '',$params = []) {
-        return $this->client->call( self::$base . $path,
-            $params);
+        return $this->client->call( self::$base . $path, $params);
     }
 
     private function call($path = '', $params = [])

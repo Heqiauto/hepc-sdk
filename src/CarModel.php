@@ -64,6 +64,17 @@ class CarModel
     }
 
     /**
+     * 根据modelId查找车型信息
+     * @param null $modelId
+     * @return mixed
+     */
+    public function getCarByModelId($modelId = null)
+    {
+        return $this->callBack('/',$modelId);
+
+    }
+
+    /**
      * 通过vin查询车型信息
      * @param null $vin
      * @return mixed

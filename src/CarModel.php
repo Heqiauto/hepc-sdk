@@ -63,6 +63,42 @@ class CarModel
         return $this->call('/' . $modelId);
     }
 
+    /**
+     * 根据modelId查找车型信息
+     * @param null $modelId
+     * @return mixed
+     */
+    public function getCarByModelId($modelId = null)
+    {
+        return $this->callBack('/',$modelId);
+
+    }
+
+    /**
+     * 通过vin查询车型信息
+     * @param null $vin
+     * @return mixed
+     */
+    public function getModelByVin($vin = null)
+    {
+        return $this->callBack('/' . $vin);
+    }
+
+    /**
+     * 识别照片解析vin获取车型信息
+     * @param $fileData
+     * @return mixed
+     */
+    public function getModelByOcr($fileData)
+    {
+        return $this->call('/get-car-models', ['file_data' => $fileData], 'POST');
+    }
+
+    
+    private  function callBack($path = '',$params = []) {
+        return $this->client->call( self::$base . $path, $params);
+    }
+
     private function call($path = '', $params = [])
     {
         return $this->client->call('/brands/' . $this->brandId . '/sub-brands/' . $this->subBrandId . '/series/' . $this->seriesId . self::$base . $path,

@@ -95,7 +95,7 @@ class CarModel
     }
 
 
-    private function callBack($path = '', $params = [], $method = '')
+    private function callBack($path = '', $params = [], $method = 'GET')
     {
         return $this->client->call(self::$base . $path, $params,$method);
     }

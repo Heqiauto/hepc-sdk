@@ -70,7 +70,7 @@ class CarModel
      */
     public function getCarByModelId($modelId = null)
     {
-        return $this->callBack('/',$modelId);
+        return $this->callBack('/' . $modelId);
 
     }
 
@@ -85,18 +85,19 @@ class CarModel
     }
 
     /**
-     * 识别照片解析vin获取车型信息
+     * 识别图片中的vin码(使用前先将图片按base64编码)
      * @param $fileData
      * @return mixed
      */
-    public function getModelByOcr($fileData)
+    public function getModelByOcr($fileData,$only = '')
     {
-        return $this->call('/get-car-models', ['file_data' => $fileData], 'POST');
+        return $this->callBack('/get-car-models', ['file' => $fileData ,'only' => $only], 'POST');
     }
 
-    
-    private  function callBack($path = '',$params = []) {
-        return $this->client->call( self::$base . $path, $params);
+
+    private function callBack($path = '', $params = [], $method = '')
+    {
+        return $this->client->call(self::$base . $path, $params,$method);
     }
 
     private function call($path = '', $params = [])

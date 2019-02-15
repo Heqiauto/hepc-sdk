@@ -24,7 +24,7 @@ $vin = new Vin($client); //创建实例对象
 $client = new HepcClient($host, $key, $secret, $opts);
 $vin = new Vin($client);
 $vin->setCache(true);
-$ret = $vin->getCarModelByVin($vin, $type, $detail);//$detail默认为0不返回详细信息，传1可返回详细信息
+$ret = $vin->getCarModelByVin($code, $type, $detail);//$detail默认为0不返回详细信息，传1可返回详细信息
 ```
 
 #### 返回示例
@@ -293,7 +293,7 @@ Array
 ```php
 $client = new HepcClient($host, $key, $secret, $opts);
 $vin = new Vin($client);
-$ret = $vin->getCarModelDetailByVin($vin);
+$ret = $vin->getCarModelDetailByVin($code);
 ```
 
 #### 返回示例

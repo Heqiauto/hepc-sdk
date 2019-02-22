@@ -14,4 +14,30 @@ API Documents
 + [配件目录类库](配件目录类库.md)
 + [详细错误码](ErrorCode.md)
 
+认证及请求签名机制
+-------------
 
+调用 API 时需要对调用者身份进行验证，以及对请求数据进行签名。
+
+需要提供3个必要的 Query 参数：`client_id`， `nonce`， `sign`，
+
+- *client_id* 是为API用户分配的 client_id 值
+- *nonce* 是由调用方生成的 42 位随机字符串，算法为 `MD5(client_id + client_secret + 时间戳) + 时间戳`, 算法中时间戳是相同值。
+- *sign* 是由签名算法得到的字符串
+
+对于 POST 请求，请求体内容格式为 json 格式。
+
+### API 地址
+
+接口访问地址为：提供的 Host/path，对于该 SDK，规则为 host + 业务模型的 $base 值 + 方法定义的路径。
+
+### 签名方法
+
+1.对所有参数按照键名进行 `字典排序`, 被签名参数不包括 `sign` 本身。
+2.将参数组装为查询字符串(使用 `&` 连接）, 按照 »RFC 1738和 application / x-www-form-urlencoded媒体类型执行编码，这意味着空格被编码为加号（+）。
+3.将请求API的路径 `path` ，与上面步骤得到的结果 `query`，`client_secret` 三个值进行字符串连接后进行MD5，得到的结果即 `sign` 参数。
+
+### 步骤
+1. 生成一个随机的 _nocie 值
+2. 对请求进行签名
+3. 使用 Http 客户端等请求 API

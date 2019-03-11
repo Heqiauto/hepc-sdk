@@ -187,7 +187,6 @@ Array
 **hub_material** | string | 轮毂材料
 **drive_system** | string | 驱动形式
 **multi_model** | integer | 是否匹配多个车型(1,2) 2表示多个
-
 **id** | int | 车型id
 **brand_id** | int | 汽车品牌ID
 **sub_brand_id** | int | 子品牌ID

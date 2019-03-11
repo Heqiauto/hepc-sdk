@@ -271,7 +271,6 @@ Array
 **rear_hub_spec** | sting | 后轮毂规格
 **hub_material** | sting | 轮毂材料
 **spare_tyre_spec** | sting | 备胎
-
 **exts** | array | 车型拓展参数
 **category_name** | string | 品类名称
 **property_id** | array | 属性id

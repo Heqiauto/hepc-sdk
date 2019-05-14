@@ -74,12 +74,13 @@ class Search
      *
      * @param string $query
      * @param integer $categoryId
-     * @param integer $groupId
-     * @param integer $page
-     * @param integer $pagesize
-     * @return array | null
+     * @param null $brandId
+     * @param null $groupId
+     * @param null $page
+     * @param int $pagesize
+     * @return void
      */
-    public function searchPart($query, $categoryId = null, $groupId = null, $page = null, $pagesize = 10)
+    public function searchPart($query, $categoryId = null, $brandId = null, $groupId = null, $page = null, $pagesize = 10)
     {
         if (empty($query)) {
             return null;
@@ -88,6 +89,7 @@ class Search
         return $this->call('/search-part', [
             'query' => $query,
             'category_id' => $categoryId,
+            'brand_id' => $brandId,
             'group_id' => $groupId,
             'page' => $page,
             'page_size' => $pagesize,

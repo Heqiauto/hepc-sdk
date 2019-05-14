@@ -82,10 +82,6 @@ class Search
      */
     public function searchPart($query, $categoryId = null, $brandId = null, $groupId = null, $page = null, $pagesize = 10)
     {
-        if (empty($query)) {
-            return null;
-        }
-
         return $this->call('/search-part', [
             'query' => $query,
             'category_id' => $categoryId,

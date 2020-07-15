@@ -79,21 +79,24 @@ class CarModel
     /**
      * 通过vin查询车型信息
      * @param null $vin
+     * @param null $from
      * @return mixed
      */
-    public function getModelByVin($vin = null)
+    public function getModelByVin($vin = null, $from = null)
     {
-        return $this->callBack('/' . $vin);
+        return $this->callBack('/' . $vin, ['option' => $from]);
     }
 
     /**
      * 识别图片中的vin码(使用前先将图片按base64编码)
      * @param $fileData
+     * @param string $only
+     * @param null $from
      * @return mixed
      */
-    public function getModelByOcr($fileData,$only = '')
+    public function getModelByOcr($fileData, $only = '',$from = null)
     {
-        return $this->callBack('/get-car-models', ['file' => $fileData ,'only' => $only], 'POST');
+        return $this->callBack('/get-car-models', ['file' => $fileData, 'only' => $only,'option' => $from], 'POST');
     }
 
 
